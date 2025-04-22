@@ -45,10 +45,10 @@
                           <thead>
                             <tr>
                               <th>No</th>
-                              <th>Nama</th>
-                              <th>Email</th>
-                              <th>Status</th>
-                              <th>Role</th>
+                              <th class="text-center">Nama</th>
+                              <th class="text-center">Email</th>
+                              <th class="text-center">Status</th>
+                              <th class="text-center">Role</th>
                               <th class="text-center">Aksi</th>
                             </tr>
                           </thead>
@@ -57,10 +57,10 @@
                             @foreach ($users as $user)  
                             <tr>
                               <td>{{$users->firstItem() + $loop->index}}</td>
-                              <td>{{$user->name}}</td>
-                              <td>{{$user->email}}</td>
-                              <td>{{$user->status ? 'Aktif' : 'Dibanned'}}</td>
-                              <td>{{$user->role}}</td>
+                              <td class="text-center">{{$user->name}}</td>
+                              <td class="text-center">{{$user->email}}</td>
+                              <td class="text-center">{{$user->status ? 'Aktif' : 'Dibanned'}}</td>
+                              <td class="text-center">{{$user->role}}</td>
                               <td class="text-center">
                                 <div class="d-grid gap-2">
                                   <a href="{{route('user.edit', $user->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>

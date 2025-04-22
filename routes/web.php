@@ -95,4 +95,7 @@ Route::middleware(['auth','role:admin,guru,murid'])->group(function(){
 Route::get('/manajement/kelas/index', [KelasController::class,'index'])->name('kelas.index');
 Route::get('/manajement/kelas/create', [KelasController::class,'create'])->name('kelas.create');
 Route::post('/manajement/kelas/create', [KelasController::class,'store'])->name('kelas.store');
+Route::get('/manajement/kelas/edit/{id}', [KelasController::class,'edit'])->name('kelas.edit');
+Route::post('/manajement/kelas/edit/{id}', [KelasController::class,'update'])->name('kelas.update');
+Route::delete('/manajement/kelas/destroy/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
 });

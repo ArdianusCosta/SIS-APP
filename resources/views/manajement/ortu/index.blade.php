@@ -39,51 +39,51 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Ayah</th>
-                                        <th>Tempat, Tanggal Lahir Ayah</th>
-                                        <th>Agama Ayah</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Pendidikan Terakhir Ayah</th>
-                                        <th>Pekerjaan Ayah</th>
-                                        <th>Nomor Telepon Ayah</th>
-                                        <th>Alamat Email Ayah</th>
-                                        <th>Alamat</th>
+                                        <th class="text-center">Nama Ayah</th>
+                                        <th class="text-center">Tempat, Tanggal Lahir Ayah</th>
+                                        <th class="text-center">Agama Ayah</th>
+                                        <th class="text-center">Jenis Kelamin</th>
+                                        <th class="text-center">Pendidikan Terakhir Ayah</th>
+                                        <th class="text-center">Pekerjaan Ayah</th>
+                                        <th class="text-center">Nomor Telepon Ayah</th>
+                                        <th class="text-center">Alamat Email Ayah</th>
+                                        <th class="text-center">Alamat</th>
 
-                                        <th>Nama Ibu</th>
-                                        <th>Tempat,Tanggal Lahir Ibu</th>
-                                        <th>Agama Ibu</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Pendidikan Terakhir Ibu</th>
-                                        <th>Pekerjaan Ibu</th>
-                                        <th>Nomor Telepon Ibu</th>
-                                        <th>Alamat Email Ibu</th>
-                                        <th>Alamat</th>
-                                        <th>Aksi</th>
+                                        <th class="text-center">Nama Ibu</th>
+                                        <th class="text-center">Tempat,Tanggal Lahir Ibu</th>
+                                        <th class="text-center">Agama Ibu</th>
+                                        <th class="text-center">Jenis Kelamin</th>
+                                        <th class="text-center">Pendidikan Terakhir Ibu</th>
+                                        <th class="text-center">Pekerjaan Ibu</th>
+                                        <th class="text-center">Nomor Telepon Ibu</th>
+                                        <th class="text-center">Alamat Email Ibu</th>
+                                        <th class="text-center">Alamat</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($orang_tuas as $orang_tua)
                                         <tr>
                                             <td>{{$orang_tuas->firstItem() + $loop->index}}</td>
-                                            <td>{{$orang_tua->nama_ayah}}</td>
-                                            <td>{{$orang_tua->tempat_lahir_ayah}}, {{ \Carbon\Carbon::parse($orang_tua->tanggal_lahir_ayah)->translatedFormat('d F Y') }}</td>
-                                            <td>{{$orang_tua->agama_ayah}}</td>
-                                            <td>{{$orang_tua->jenis_kelamin_ayah}}</td>
-                                            <td>{{$orang_tua->pendidikan_terakhir_ayah}}</td>
-                                            <td>{{$orang_tua->pekerjaan_ayah}}</td>
-                                            <td>{{$orang_tua->nomor_telepon_ayah}}</td>
-                                            <td>{{$orang_tua->email}}</td>
-                                            <td>{{$orang_tua->alamat_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->nama_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->tempat_lahir_ayah}}, {{ \Carbon\Carbon::parse($orang_tua->tanggal_lahir_ayah)->translatedFormat('d F Y') }}</td>
+                                            <td class="text-center">{{$orang_tua->agama_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->jenis_kelamin_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->pendidikan_terakhir_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->pekerjaan_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->nomor_telepon_ayah}}</td>
+                                            <td class="text-center">{{$orang_tua->email}}</td>
+                                            <td class="text-center">{{$orang_tua->alamat_ayah}}</td>
 
-                                            <td>{{$orang_tua->nama_ibu}}</td>
-                                            <td>{{$orang_tua->tempat_lahir_ibu}}, {{ \Carbon\Carbon::parse($orang_tua->tanggal_lahir_ibu)->translatedFormat('d F Y') }}</td>
-                                            <td>{{$orang_tua->agama_ibu}}</td>
-                                            <td>{{$orang_tua->jenis_kelamin_ibu}}</td>
-                                            <td>{{$orang_tua->pendidikan_terakhir_ibu}}</td>
-                                            <td>{{$orang_tua->pekerjaan_ibu}}</td>
-                                            <td>{{$orang_tua->nomor_telepon_ibu}}</td>
-                                            <td>{{$orang_tua->email1}}</td>
-                                            <td>{{$orang_tua->alamat_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->nama_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->tempat_lahir_ibu}}, {{ \Carbon\Carbon::parse($orang_tua->tanggal_lahir_ibu)->translatedFormat('d F Y') }}</td>
+                                            <td class="text-center">{{$orang_tua->agama_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->jenis_kelamin_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->pendidikan_terakhir_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->pekerjaan_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->nomor_telepon_ibu}}</td>
+                                            <td class="text-center">{{$orang_tua->email1}}</td>
+                                            <td class="text-center">{{$orang_tua->alamat_ibu}}</td>
                                             <td class="text-center">
                                                 <div class="d-grid gap-2">
                                                     <a href="{{route('ortu.edit', $orang_tua->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
