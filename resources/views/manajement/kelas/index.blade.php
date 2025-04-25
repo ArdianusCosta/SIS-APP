@@ -38,24 +38,26 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Kelas</th>
-                                        <th>Jurusan</th>
-                                        <th>Wali Kelas</th>
-                                        <th>Aksi</th>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Kelas</th>
+                                        <th class="text-center">Jurusan</th>
+                                        <th class="text-center">Wali Kelas</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($kelas as $kela)
                                     <tr>
-                                        <td>{{ $kelas->firstItem() + $loop->index }}</td>
-                                        <td>{{$kela->kelas}}</td>
-                                        <td>{{ $kela->jurusan }}</td>
-                                        <td>{{ $kela->waliKelas->nama ?? '-' }}</td>
+                                        <td class="text-center">{{ $kelas->firstItem() + $loop->index }}</td>
+                                        <td class="text-center">{{$kela->kelas}}</td>
+                                        <td class="text-center">{{ $kela->jurusan }}</td>
+                                        <td class="text-center">{{ $kela->waliKelas->nama ?? '-' }}</td>
                                         <td class="text-center">
                                             <div class="d-grid gap-2">
-                                                <a href="#" class="btn btn-warning mr-2 mb-2">Edit</a>
-                                                <form action="#" method="post">
+                                                <a href="{{route('kelas.edit', $kela->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
+                                                <form action="{{route('kelas.destroy', $kela->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
                                                     <input type="submit" class="btn btn-danger mr-2 mb-2" value="Hapus">
                                                 </form>
                                              </div> 

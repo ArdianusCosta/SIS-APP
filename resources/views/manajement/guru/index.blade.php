@@ -42,34 +42,34 @@ $title = 'Guru';
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Status</th>
-                                    <th>Jabatan</th>
-                                    <th>Nomor Induk Karyawan</th>
-                                    <th>Pendidikan</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Agama</th>
-                                    <th>Tempat, tanggal Lahir</th>
-                                    <th>Alamat</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Jabatan</th>
+                                    <th class="text-center">Nomor Induk Karyawan</th>
+                                    <th class="text-center">Pendidikan</th>
+                                    <th class="text-center">Mata Pelajaran</th>
+                                    <th class="text-center">Jenis Kelamin</th>
+                                    <th class="text-center">Agama</th>
+                                    <th class="text-center">Tempat, tanggal Lahir</th>
+                                    <th class="text-center">Alamat</th>
+                                    <th class="text-center">Aksi</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($gurus as $guru)
                                         <tr>
-                                            <td>{{$gurus->firstItem() + $loop->index}}</td>
-                                            <td>{{$guru->nama}}</td>
-                                            <td>{{$guru->status}}</td>
-                                            <td>{{$guru->jabatan}}</td>
-                                            <td>{{$guru->nik}}</td>
-                                            <td>{{$guru->pendidikan}}</td>
-                                            <td>{{$guru->mata_pelajaran}}</td>
-                                            <td>{{$guru->jenis_kelamin}}</td>
-                                            <td>{{$guru->agama}}</td>
-                                            <td>{{ $guru->tempat_lahir }}, {{ \Carbon\Carbon::parse($guru->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                                            <td class="text-center">{{$gurus->firstItem() + $loop->index}}</td>
+                                            <td class="text-center">{{$guru->nama}}</td>
+                                            <td class="text-center">{{$guru->status}}</td>
+                                            <td class="text-center">{{$guru->jabatan}}</td>
+                                            <td class="text-center">{{$guru->nik}}</td>
+                                            <td class="text-center">{{$guru->pendidikan}}</td>
+                                            <td class="text-center">{{$guru->mata_pelajaran}}</td>
+                                            <td class="text-center">{{$guru->jenis_kelamin}}</td>
+                                            <td class="text-center">{{$guru->agama}}</td>
+                                            <td class="text-center">{{ $guru->tempat_lahir }}, {{ \Carbon\Carbon::parse($guru->tanggal_lahir)->translatedFormat('d F Y') }}</td>
                                             {{-- <td>{{$guru->tanggal_lahir}}</td> --}}
-                                            <td>{{$guru->alamat}}</td>
+                                            <td class="text-center">{{$guru->alamat}}</td>
                                             <td class="text-center">
                                                 <div class="d-grid gap-2">
                                                     <a href="{{route('guru.edit', $guru->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>

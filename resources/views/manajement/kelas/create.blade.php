@@ -23,6 +23,15 @@
                             <a href="{{route('kelas.index')}}" class="btn btn-success float-right">Kembali</a>
                         </h4>
                     </div>
+                    @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     <form action="{{route('kelas.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                     <div class="card-body">
