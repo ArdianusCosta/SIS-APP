@@ -23,6 +23,15 @@
                         <a href="{{route('ortu.index')}}" class="btn btn-success float-right">Kembali</a>
                     </div>
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{route('ortu.update', $orang_tua->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">

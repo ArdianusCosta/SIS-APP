@@ -38,7 +38,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th class="text-center">No</th>
                                         <th class="text-center">Kelas</th>
                                         <th class="text-center">Jurusan</th>
                                         <th class="text-center">Wali Kelas</th>
@@ -48,7 +48,7 @@
                                 <tbody>
                                     @foreach ($kelas as $kela)
                                     <tr>
-                                        <td>{{ $kelas->firstItem() + $loop->index }}</td>
+                                        <td class="text-center">{{ $kelas->firstItem() + $loop->index }}</td>
                                         <td class="text-center">{{$kela->kelas}}</td>
                                         <td class="text-center">{{ $kela->jurusan }}</td>
                                         <td class="text-center">{{ $kela->waliKelas->nama ?? '-' }}</td>

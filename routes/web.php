@@ -88,6 +88,10 @@ Route::delete('/manajement/ortu/destroy/{id}', [OrangTuaController::class, 'dest
 Route::middleware(['auth','role:admin,guru'])->group(function(){
 Route::get('/manajement/siswa/index', [SiswaController::class, 'index'])->name('siswa.index');
 Route::get('/manajement/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+Route::post('/manajement/siswa/create', [SiswaController::class, 'store'])->name('siswa.store');
+Route::get('/manajement/siswa/edit/{id}', [SiswaController::class, 'edit'])->name('siswa.edit');
+Route::post('/manajement/siswa/edit/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+Route::delete('/manajement/siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 });
 
 //Kelas

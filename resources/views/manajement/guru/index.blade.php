@@ -42,7 +42,7 @@ $title = 'Guru';
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <th>No</th>
+                                    <th class="text-center">No</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Jabatan</th>
@@ -58,7 +58,7 @@ $title = 'Guru';
                                 <tbody>
                                     @foreach ($gurus as $guru)
                                         <tr>
-                                            <td>{{$gurus->firstItem() + $loop->index}}</td>
+                                            <td class="text-center">{{$gurus->firstItem() + $loop->index}}</td>
                                             <td class="text-center">{{$guru->nama}}</td>
                                             <td class="text-center">{{$guru->status}}</td>
                                             <td class="text-center">{{$guru->jabatan}}</td>

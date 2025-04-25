@@ -38,7 +38,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th class="text-center">No</th>
                                         <th class="text-center">Nama Ayah</th>
                                         <th class="text-center">Tempat, Tanggal Lahir Ayah</th>
                                         <th class="text-center">Agama Ayah</th>
@@ -64,7 +64,7 @@
                                 <tbody>
                                     @foreach ($orang_tuas as $orang_tua)
                                         <tr>
-                                            <td>{{$orang_tuas->firstItem() + $loop->index}}</td>
+                                            <td class="text-center">{{$orang_tuas->firstItem() + $loop->index}}</td>
                                             <td class="text-center">{{$orang_tua->nama_ayah}}</td>
                                             <td class="text-center">{{$orang_tua->tempat_lahir_ayah}}, {{ \Carbon\Carbon::parse($orang_tua->tanggal_lahir_ayah)->translatedFormat('d F Y') }}</td>
                                             <td class="text-center">{{$orang_tua->agama_ayah}}</td>

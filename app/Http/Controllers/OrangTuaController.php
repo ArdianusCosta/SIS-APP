@@ -36,7 +36,7 @@ class OrangTuaController extends Controller
         $request->validate([
             'nama_ayah' => 'required',
             'tempat_lahir_ayah' => 'nullable',
-            'tanggal_lahir_ayah' => 'required',
+            'tanggal_lahir_ayah' => 'required|date',
             'agama_ayah' => 'required|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
             'jenis_kelamin_ayah' => 'required|in:Laki-laki',
             'pendidikan_terakhir_ayah' => 'required|in:SD,SMP,SMA,SMK,D1,D2,D3,D4,S1,S2,S3',
@@ -47,7 +47,7 @@ class OrangTuaController extends Controller
 
             'nama_ibu' => 'required',
             'tempat_lahir_ibu' => 'nullable',
-            'tanggal_lahir_ibu' => 'required',
+            'tanggal_lahir_ibu' => 'required|date',
             'agama_ibu' => 'required|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
             'jenis_kelamin_ibu' => 'required|in:Perempuan',
             'pendidikan_terakhir_ibu' => 'required|in:SD,SMP,SMA,SMK,D1,D2,D3,D4,S1,S2,S3',

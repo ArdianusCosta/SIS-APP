@@ -38,12 +38,57 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Siswa</th>
-                                        
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Nama Siswa</th>
+                                        <th class="text-center">Kelas & Jurusan Siswa</th>
+                                        <th class="text-center">Wali Kelas Siswa</th>
+                                        <th class="text-center">Tempat, Tanggal Lahir Siswa</th>
+                                        <th class="text-center">Jenis Kelamin Siswa</th>
+                                        <th class="text-center">Nomor Induk Siswa (NIS)</th>
+                                        <th class="text-center">Agama Siswa</th>
+                                        <th class="text-center">Jumlah Saudara Siswa</th>
+                                        <th class="text-center">Email Siswa</th>
+                                        <th class="text-center">Nomor Telepon Siswa</th>
+                                        <th class="text-center">Alamat</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    @foreach ($siswas as $siswa)
+                                        <tr>
+                                            <td class="text-center">{{$siswas->firstItem() + $loop->index}}</td>
+                                            <td class="text-center">{{$siswa->nama}}</td>
+                                            <td class="text-center">{{$siswa->kelas->kelas}} - {{($siswa->kelas->jurusan)}}</td>
+                                            <td class="text-center">{{$siswa->waliKelas->nama}}</td>
+                                            <td class="text-center">{{$siswa->tempat_lahir}}, {{ \Carbon\Carbon::parse($siswa->tanggal_lahir)->translatedFormat('d F Y')}}</td>
+                                            <td class="text-center">{{$siswa->jenis_kelamin}}</td>
+                                            <td class="text-center">{{$siswa->nis}}</td>
+                                            <td class="text-center">{{$siswa->agama}}</td>
+                                            <td class="text-center">{{$siswa->jumlah_saudara}} Orang</td>
+                                            <td class="text-center">{{$siswa->email}}</td>
+                                            <td class="text-center">{{$siswa->no_telepon}}</td>
+                                            <td class="clas-center">{{$siswa->alamat}}</td>
+                                            <td class="text-center">
+                                                <div class="d-grid gap-2">
+                                                    <a href="{{route('siswa.edit', $siswa->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
+                                                    <form action="{{route('siswa.destroy', $siswa->id)}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Hapus" class="btn btn-danger mr-2 mb-2">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>   
+                                    @endforeach
+                                </tbody>
                             </table>
+
+                            <div class="col-12">
+                                <div class="pagination-wrapper mt-3">
+                                    {{$siswas->links()}}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
