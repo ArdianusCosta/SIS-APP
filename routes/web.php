@@ -32,17 +32,17 @@ Route::post('/auth/login', [LoginController::class, 'login'])->name('loginSukses
 Route::get('/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
 //pengguna SIS-APP
-Route::middleware(['auth','role:admin'])->group(function () {
+Route::middleware(['auth','role:admin','guru'])->group(function () {
 Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 Route::delete('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user.hapus');
-});
+// });
 
 //Absensi SIS-APP
-Route::middleware(['auth','role:admin,guru'])->group(function (){
+// Route::middleware(['auth','role:admin,guru'])->group(function (){
 Route::get('/absensi/index', [AbsensiController::class, 'index'])->name('absensi.index');
 });
 
