@@ -190,7 +190,7 @@
         </div>
       </form>
 
-      <p class="footer text-center">&copy; {{ date('Y') }} SIS-App</p>
+      <p class="footer text-center">&copy; {{ date('Y') }} SIS-APP</p>
     </div>
   </div>
 </body>
