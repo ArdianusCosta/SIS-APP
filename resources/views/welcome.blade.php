@@ -18,7 +18,7 @@
 
 @section('content')
 
-{{-- @include('layouts.inc.alert') --}}
+@include('layouts.inc.alert')
 
      <!-- Default box -->
      <div class="card">

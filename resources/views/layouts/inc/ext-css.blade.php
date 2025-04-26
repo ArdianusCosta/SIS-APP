@@ -54,8 +54,7 @@
     border-radius: 50%;
     object-fit: cover;
   }
-
-
+  
   </style>
   
   

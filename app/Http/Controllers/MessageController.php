@@ -39,7 +39,7 @@ class MessageController extends Controller
 
         if ($request->filled('email')) {
             Mail::to($request->email)->send(
-                new KirimEmail($message->nama_pengirim, $message->pesan, $message->file ? asset('storage/' . $message->file) : null)
+                new KirimEmail($message->nama_pengirim, $message->pesan, $message->file ? url('download/' . basename($message->file)) : null)
             );                    } else {
             $users = User::all();
             foreach ($users as $user) {

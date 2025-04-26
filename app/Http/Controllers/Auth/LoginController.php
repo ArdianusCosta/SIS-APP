@@ -40,7 +40,7 @@ class LoginController extends Controller
             //         return redirect()->route('welcome');
             // }
 
-            return redirect('/');
+            return redirect('/')->with('success','Selamat Datang di SIS-APP');
         }
         return back()->withErrors(['email'=>'Email atau Password anda salah']);
     }

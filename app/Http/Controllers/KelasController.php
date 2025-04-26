@@ -4,34 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Kelas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
+
     public function index(Request $request)
     {
         $query = Kelas::query();
 
-        $columns = ['kelas', 'jurusan', 'wali_kelas_id'];
+        if ($request->filled('date_start') && $request->filled('date_end')) {
+            $query->whereBetween('created_at', [$request->date_start, $request->date_end]);
+        }
+
+        if ($request->filled('kelas')) {
+            $query->where('kelas', $request->kelas);
+        }
+
+        if ($request->filled('jurusan')) {
+            $query->where('jurusan', $request->jurusan);
+        }
 
         if ($request->filled('cari')) {
+            $columns = ['kelas', 'jurusan', 'wali_kelas_id'];
             $query->where(function($q) use ($request, $columns) {
                 foreach ($columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->cari . '%');
                 }
-            });
-
-            $query->orWhereHas('waliKelas', function ($q) use ($request) {
+            })
+            ->orWhereHas('waliKelas', function ($q) use ($request) {
                 $q->where('nama', 'like', '%' . $request->cari . '%');
-            });
+            }); 
         }
 
         $kelas = $query->with('waliKelas')->paginate(5)->appends($request->all());
-
         $gurus = Guru::paginate(5);
 
         return view('manajement.kelas.index', compact('kelas', 'gurus'));
     }
+
 
     public function create()
     {

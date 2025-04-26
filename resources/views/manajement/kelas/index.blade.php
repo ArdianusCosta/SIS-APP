@@ -33,7 +33,46 @@
                             <a href="{{route('kelas.create')}}" class="btn btn-success float-right">Tambah Data Kelas</a>
                         </h4>
                     </div>
-                    <div class="card-body">
+                    
+                    <form action="" method="get">
+                        <div class="container-fluid p-3" style="background-color: #343536">
+                            <div class="row">
+                                <div class="col-md-2 mb-2">
+                                    <input type="date" name="date_start" value="{{ request('date_start') }}" class="form-control">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <input type="date" name="date_end" value="{{ request('date_end') }}" class="form-control">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <select name="kelas" class="form-control">
+                                        <option value="">-- Pilih Kelas --</option>
+                                        <option value="X" {{ request('kelas') == 'X' ? 'selected' : '' }}>Kelas X</option>
+                                        <option value="XI" {{ request('kelas') == 'XI' ? 'selected' : '' }}>Kelas XI</option>
+                                        <option value="XII" {{ request('kelas') == 'XII' ? 'selected' : '' }}>Kelas XII</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <select name="jurusan" class="form-control">
+                                        <option value="">-- Pilih Jurusan --</option>
+                                        <option value="RPL" {{ request('jurusan') == 'RPL' ? 'selected' : ''}}>RPL</option>
+                                        <option value="DKV" {{request('jurusan') == 'DKV' ? 'selected' : ''}}>DKV</option>
+                                        <option value="KULINER" {{request('jurusan') == 'KULINER' ? 'selected' : ''}}>KULINER</option>
+                                        <option value="TP" {{request('jurusan') == 'TP' ? 'selected' : ''}}>TP</option>
+                                        <option value="TKP" {{request('jurusan') == 'TKP' ? 'selected' : ''}}>TKP</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <button type="submit" class="btn btn-warning btn-block">Periksa</button>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <a href="#" class="btn btn-warning btn-block">EXPORT EXCEL</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+
+                    {{-- <div class="card-body"> --}}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -74,7 +113,7 @@
                             </div>
 
                         </div>
-                    </div>
+                        {{-- </div> --}}
                 </div>
             </div>
         </div>

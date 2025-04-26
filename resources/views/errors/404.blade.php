@@ -85,6 +85,7 @@ a:hover
                </div>
            </div>
        </div>
+       <strong class="">Copyright &copy; 2025 <a href="https://github.com/ArdianusCosta">SIS-APP</a>.</strong> All rights reserved.
    </section>
 </body>
 </html>
