@@ -16,7 +16,6 @@ class UserController extends Controller
         if ($request->filled('cari')) {
             $keyword = $request->cari;
         
-            // Mapping pencarian status
             $statusValue = null;
             if (strtolower($keyword) == 'aktif') {
                 $statusValue = 1;
