@@ -101,4 +101,9 @@ class KelasController extends Controller
         $kelas->delete();
         return back()->with('success','Berhasil Hapus Data');
     }
+
+    public function show()
+    {
+        
+    }
 }

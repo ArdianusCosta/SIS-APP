@@ -94,6 +94,9 @@
                                         <td class="text-center">
                                             <div class="d-grid gap-2">
                                                 <a href="{{route('kelas.edit', $kela->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
+                                                <a href="#" class="btn btn-info mr-2 mb-2">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>                                                
                                                 <form action="{{route('kelas.destroy', $kela->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
