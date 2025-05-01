@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
-            $table->
+            $table->foreignId('nama_siswa_id')->constrained('siswas')->onDelete('cascade');
             $table->timestamps();
         });
     }

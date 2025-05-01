@@ -45,13 +45,32 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label>Tanggal & Waktu</label>
-                                    <input type="datetime-local" name="tanggal_waktu" id="tanggal_waktu" 
-                                    class="form-control" 
-                                    value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" 
-                                    min="{{ \Carbon\Carbon::today()->format('Y-m-d\T00:00') }}"
-                                    max="{{ \Carbon\Carbon::today()->format('Y-m-d\T23:59') }}">                                </div>
-                                 </div>
+                                    <label>Jam Sekarang (Otomatis)</label>
+                                    <input type="text" id="jam_digital_display" class="form-control" readonly>
+                                    <input type="hidden" name="tanggal_waktu" id="jam_digital_value">
+                                </div>                                
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const display = document.getElementById('jam_digital_display');
+                                        const hiddenInput = document.getElementById('jam_digital_value');
+                                
+                                        function updateJam() {
+                                            const now = new Date();
+                                            const pad = (n) => n.toString().padStart(2, '0');
+                                
+                                            const tampil = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+                                            display.value = tampil;
+                                
+                                            const kirim = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+                                            hiddenInput.value = kirim;
+                                        }
+                                
+                                        setInterval(updateJam, 1000);
+                                        updateJam();
+                                    });
+                                </script>                                
+                                
+                            </div>
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label>Status Kehadiran</label>
