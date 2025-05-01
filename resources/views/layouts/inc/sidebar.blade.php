@@ -77,12 +77,18 @@
                         <p>Manajement Akademik</p>
                       </a>
                     </li>
+
+                    @auth
+                    @if (auth()->user()->role === 'admin')
                     <li class="nav-item">
                       <a href="{{route('guru.index')}}" class="nav-link {{request()->routeIs('guru.index') ? 'active' : ''}}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Manajement Guru</p>
                       </a>
                     </li>
+                    @endif
+                    @endauth
+
                     <li class="nav-item">
                       <a href="{{route('siswa.index')}}" class="nav-link {{request()->routeIs('siswa.index') ? 'active' : ''}}">
                         <i class="far fa-circle nav-icon"></i>
@@ -124,8 +130,8 @@
                         <p>Absensi Scan</p>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a href="../charts/flot.html" class="nav-link">
+                    <li class="nav-item {{request()->routeIs('absensi-input.create') ? 'active' : ''}}">
+                      <a href="{{route('absensi-input.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Absensi Input</p>
                       </a>

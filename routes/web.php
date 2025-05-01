@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
@@ -43,7 +44,8 @@ Route::delete('/user/hapus/{id}', [UserController::class, 'destroy'])->name('use
 
 //Absensi SIS-APP
 Route::middleware(['auth','check.status','role:admin,guru'])->group(function (){
-Route::get('/absensi/index', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::get('/absensi/input/list', [AbsensiController::class, 'list'])->name('absensi.list');
+Route::get('/absensi/input/create', [AbsensiController::class, 'create'])->name('absensi-input.create');
 });
 
 //informasi & penggumuman 
@@ -65,7 +67,7 @@ Route::post('/profile/update', [ProfileController::class, 'update'])->name('prof
 });
 
 //guru 
-Route::middleware(['auth','check.status','role:admin,guru'])->group(function (){
+Route::middleware(['auth','check.status','role:admin'])->group(function (){
 Route::get('/manajement/guru/index', [GuruController::class, 'index'])->name('guru.index');
 Route::get('/manajement/guru/create', [GuruController::class, 'create'])->name('guru.create');
 Route::post('/manajement/guru/create', [GuruController::class, 'store'])->name('guru.store');
@@ -103,3 +105,6 @@ Route::get('/manajement/kelas/edit/{id}', [KelasController::class,'edit'])->name
 Route::post('/manajement/kelas/edit/{id}', [KelasController::class,'update'])->name('kelas.update');
 Route::delete('/manajement/kelas/destroy/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
 });
+
+//contact untuk hubugin bang costaaja .. wop
+Route::get('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'index'])->name('contact-to-speedseat.index');

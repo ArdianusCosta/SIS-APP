@@ -10,10 +10,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/admin/index3.html" class="nav-link">Home</a>
+        <a href="{{route('welcome')}}" class="nav-link  {{ request()->routeIs('welcome') ? 'active' : '' }}">Dashboard</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="{{route('contact-to-speedseat.index')}}" class="nav-link {{request()->routeIs('contact-to-speedseat.index') ? 'active' : ''}}">Contact</a>
       </li>
     </ul>
 
