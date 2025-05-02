@@ -46,6 +46,8 @@ Route::delete('/user/hapus/{id}', [UserController::class, 'destroy'])->name('use
 Route::middleware(['auth','check.status','role:admin,guru'])->group(function (){
 Route::get('/absensi/input/list', [AbsensiController::class, 'list'])->name('absensi.list');
 Route::get('/absensi/input/create', [AbsensiController::class, 'create'])->name('absensi-input.create');
+Route::post('/absensi/input/create', [AbsensiController::class, 'store'])->name('absensi-input.store');
+Route::get('/absensi/input/cari', [AbsensiController::class, 'cariSiswa']);
 });
 
 //informasi & penggumuman 

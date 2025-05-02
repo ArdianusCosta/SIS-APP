@@ -15,4 +15,8 @@ class Kelas extends Model
     {
         return $this->belongsTo(Guru::class,'wali_kelas_id');
     }
+
+    public function absensi(){
+        return $this->hasMany(Absensi::class);
+    }
 }
