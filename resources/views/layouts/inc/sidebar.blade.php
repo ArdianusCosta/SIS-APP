@@ -125,13 +125,13 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="../charts/chartjs.html" class="nav-link">
+                      <a href="{{ route('scan-qrcode') }}" class="nav-link {{ request()->routeIs('scan-qrcode') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Absensi Scan</p>
-                      </a>
+                    </a>                    
                     </li>
-                    <li class="nav-item {{request()->routeIs('absensi-input.create') ? 'active' : ''}}">
-                      <a href="{{route('absensi-input.create')}}" class="nav-link">
+                    <li class="nav-item">
+                      <a href="{{route('absensi-input.create')}}" class="nav-link  {{request()->routeIs('absensi-input.create') ? 'active' : ''}}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Absensi Input</p>
                       </a>

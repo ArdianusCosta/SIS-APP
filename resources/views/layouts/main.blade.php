@@ -42,7 +42,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+@stack('scripts')
 @include('layouts.inc.ext-js')
 @stack('js')
 </body>

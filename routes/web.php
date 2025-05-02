@@ -48,6 +48,12 @@ Route::get('/absensi/input/list', [AbsensiController::class, 'list'])->name('abs
 Route::get('/absensi/input/create', [AbsensiController::class, 'create'])->name('absensi-input.create');
 Route::post('/absensi/input/create', [AbsensiController::class, 'store'])->name('absensi-input.store');
 Route::get('/absensi/input/cari', [AbsensiController::class, 'cariSiswa']);
+//scan
+Route::get('/absensi/scan/index-scan', [AbsensiController::class, 'indexScan'])->name('index-scan');
+Route::post('/absensi/scan/index-scan', [AbsensiController::class, 'submit'])->name('indexScan-submit');
+
+// Halaman scan kamera QR
+Route::get('/absensi/scan/scan-qrcode', [AbsensiController::class, 'scanQrcode'])->name('scan-qrcode');
 });
 
 //informasi & penggumuman 

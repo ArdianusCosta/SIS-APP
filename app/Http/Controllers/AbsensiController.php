@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Absensi;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AbsensiController extends Controller
 {
@@ -38,6 +41,16 @@ class AbsensiController extends Controller
             'keterangan' => 'nullable',
         ]);
 
+        $tanggal = Carbon::parse($request->tanggal_waktu)->format('Y-m-d');
+
+        $sudahAbsen = Absensi::where('siswa_id', $request->siswa_id)
+        ->whereDate('tanggal_waktu', $tanggal)
+        ->exists();
+
+        if($sudahAbsen){
+            return back()->with('error','Siswa sudah absen hari ini!');
+        }
+
         Absensi::create([
             'siswa_id' => $request->siswa_id,
             'kelas_id' => $request->kelas_id,
@@ -46,6 +59,31 @@ class AbsensiController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return back()->with('success','Hadir');
+        return back()->with('success','Absensi Berhasil');
+    }
+
+    public function indexScan()
+    {
+        return view('absensi.scan.index-scan');
+    }
+
+    public function submit(Request $request)
+    {
+        $this->validate($request, [
+            'link' => 'required|url',
+        ]);
+
+        $uid = time();
+        $qr = QrCode::format('png')->generate($request->link);
+        $qrImageName = $uid . '.png';
+
+        Storage::put('public/qr/' . $qrImageName, $qr);
+
+        return view('absensi.scan.scan-qrcode', compact('uid'));
+    }
+
+    public function scanQrcode()
+    {
+        return view('absensi.scan.scan-kamera');
     }
 }
