@@ -34,18 +34,21 @@
                         </h4>
                     </div>
                     
-                    <form action="" method="get">
+                    <form action="#" method="get">
                         <div class="container-fluid p-3" style="background-color: #343536">
                             <div class="row">
+                                @php
+                                    $date_start = request('date_start') ?? \Carbon\Carbon::parse($firstDate)->format('Y-m-d');
+                                @endphp
                                 <div class="col-md-2 mb-2">
-                                    <input type="date" name="date_start" value="{{ request('date_start') }}" class="form-control">
+                                    <input type="date" name="date_start" value="{{$date_start}}" class="form-control">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <input type="date" name="date_end" value="{{ request('date_end') }}" class="form-control">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <select name="kelas" class="form-control">
-                                        <option value="">-- Pilih Kelas --</option>
+                                        <option value="">-- Filter Kelas --</option>
                                         <option value="X" {{ request('kelas') == 'X' ? 'selected' : '' }}>Kelas X</option>
                                         <option value="XI" {{ request('kelas') == 'XI' ? 'selected' : '' }}>Kelas XI</option>
                                         <option value="XII" {{ request('kelas') == 'XII' ? 'selected' : '' }}>Kelas XII</option>
@@ -53,7 +56,7 @@
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <select name="jurusan" class="form-control">
-                                        <option value="">-- Pilih Jurusan --</option>
+                                        <option value="">-- Filter Jurusan --</option>
                                         <option value="RPL" {{ request('jurusan') == 'RPL' ? 'selected' : ''}}>RPL</option>
                                         <option value="DKV" {{request('jurusan') == 'DKV' ? 'selected' : ''}}>DKV</option>
                                         <option value="KULINER" {{request('jurusan') == 'KULINER' ? 'selected' : ''}}>KULINER</option>
@@ -62,10 +65,10 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <button type="submit" class="btn btn-warning btn-block">Periksa</button>
+                                    <button type="submit" class="btn btn-warning btn-block">Filter</button>
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <a href="#" class="btn btn-warning btn-block">EXPORT EXCEL</a>
+                                    <a href="{{route('kelas.export')}}" class="btn btn-warning btn-block">EXPORT</a>
                                 </div>
                             </div>
                         </div>

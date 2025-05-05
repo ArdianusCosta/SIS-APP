@@ -117,7 +117,7 @@
                 <li class="nav-header">Halaman Absensi</li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <i class="nav-icon fa fa-calendar"></i>
                     <p>
                       Absensi
                       <i class="right fas fa-angle-left"></i>
@@ -140,6 +140,35 @@
                       <a href="../charts/inline.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Rekap Harian & Bulanan</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="../charts/uplot.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Export Laporan</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+            @endif
+          @endauth
+
+          @auth
+            @if (in_array(auth()->user()->role, ['admin','guru']))
+                <li class="nav-header">Halaman Aktivitas</li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-file"></i>
+                    <p>
+                      Aktivitas
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="../charts/inline.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Surat Izin</p>
                       </a>
                     </li>
                     <li class="nav-item">

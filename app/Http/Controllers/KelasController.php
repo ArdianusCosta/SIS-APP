@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Guru;
 use App\Models\Kelas;
-use Carbon\Carbon;
+use App\Exports\KelasExport;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KelasController extends Controller
 {
@@ -38,12 +41,12 @@ class KelasController extends Controller
             }); 
         }
 
+        $firstDate = Kelas::orderBy('created_at')->value('created_at');
         $kelas = $query->with('waliKelas')->paginate(5)->appends($request->all());
         $gurus = Guru::paginate(5);
 
-        return view('manajement.kelas.index', compact('kelas', 'gurus'));
+        return view('manajement.kelas.index', compact('kelas', 'gurus','firstDate'));
     }
-
 
     public function create()
     {
@@ -105,5 +108,10 @@ class KelasController extends Controller
     public function show()
     {
         
+    }
+
+    public function export()
+    {
+        return Excel::download(new KelasExport, 'Kelas.xlsx');
     }
 }

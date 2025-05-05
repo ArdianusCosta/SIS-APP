@@ -2,28 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrangTuaExport;
 use App\Models\OrangTua;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrangTuaController extends Controller
 {
     public function index(Request $request)
     {
         $query = OrangTua::query();
-
-        $columns = ['nama_ayah','tempat_lahir_ayah','tanggal_lahir_ayah','agama_ayah','jenis_kelamin_ayah','pendidikan_terakhir_ayah','pekerjaan_ayah','nomor_telepon_ayah','email','alamat_ayah',
-                    'nama_ibu','tempat_lahir_ibu','tanggal_lahir_ibu','agama_ibu','jenis_kelamin_ibu','pendidikan_terakhir_ibu','pekerjaan_ibu','nomor_telepon_ibu','email1','alamat_ibu'];
-
-        if($request->filled('cari')){
+    
+        $columns = [
+            'nama_ayah', 'tempat_lahir_ayah', 'tanggal_lahir_ayah', 'agama_ayah', 'jenis_kelamin_ayah',
+            'pendidikan_terakhir_ayah', 'pekerjaan_ayah', 'nomor_telepon_ayah', 'email', 'alamat_ayah',
+            'nama_ibu', 'tempat_lahir_ibu', 'tanggal_lahir_ibu', 'agama_ibu', 'jenis_kelamin_ibu',
+            'pendidikan_terakhir_ibu', 'pekerjaan_ibu', 'nomor_telepon_ibu', 'email1', 'alamat_ibu'
+        ];
+    
+        if ($request->filled('date_start') && $request->filled('date_end')) {
+            $query->whereBetween('created_at', [$request->date_start, $request->date_end]);
+        }
+    
+        if ($request->filled('cari')) {
             $query->where(function($q) use ($request, $columns) {
                 foreach ($columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->cari . '%');
                 }
             });
         }
-
+    
+        $firstDate = OrangTua::orderBy('created_at')->value('created_at');
+    
         $orang_tuas = $query->paginate(5)->appends($request->all());
-        return view('.manajement.ortu.index',compact('orang_tuas'));
+    
+        return view('manajement.ortu.index', compact('orang_tuas', 'firstDate'));
     }
 
     public function create()
@@ -145,5 +158,10 @@ class OrangTuaController extends Controller
         $orang_tua = OrangTua::findOrFail($id);
         $orang_tua->delete();
         return back()->with('success','Berhasil Hapus Data');
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrangTuaExport, 'OrangTua.xlsx');
     }
 }

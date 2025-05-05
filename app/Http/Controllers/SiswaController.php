@@ -4,40 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Kelas;
-use App\Models\OrangTua;
 use App\Models\Siswa;
-use Illuminate\Validation\Rule;
+use App\Models\OrangTua;
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Siswa::query();
-
-        $columns = ['nama','kelas_id','wali_kelas_id','tempat_lahir','tanggal_lahir','jenis_kelamin','nis','agama','jumlah_saudara','email','no_telepon','qrcode','alamat'];
+        $query = Siswa::with(['kelas', 'waliKelas']);
 
         if ($request->filled('cari')) {
+            $columns = ['nama','kelas_id','wali_kelas_id','tempat_lahir','tanggal_lahir','jenis_kelamin','nis','agama','jumlah_saudara','email','no_telepon','qrcode','alamat'];
+
             $query->where(function($q) use ($request, $columns) {
                 foreach ($columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->cari . '%');
                 }
-        
+
                 $q->orWhereHas('kelas', function ($kelasQuery) use ($request) {
                     $kelasQuery->where('kelas', 'like', '%' . $request->cari . '%')
-                               ->orWhere('jurusan', 'like', '%' . $request->cari . '%');
+                            ->orWhere('jurusan', 'like', '%' . $request->cari . '%');
                 });
-        
+
                 $q->orWhereHas('waliKelas', function ($guruQuery) use ($request) {
                     $guruQuery->where('nama', 'like', '%' . $request->cari . '%');
                 });
             });
         }
-        
 
-        $siswas = Siswa::with(['kelas','waliKelas']);
+        if ($request->filled('kelas')) {
+            $query->where('kelas_id', $request->kelas);
+        }
+
+        if($request->filled('agama')){
+            $query->where('agama', $request->agama);
+        }
+
+        $kelas = Kelas::all();
+        $firstDate = Siswa::orderBy('created_at')->value('created_at');
         $siswas = $query->paginate(5)->appends($request->all());
-        return view ('.manajement.siswa.index', compact('siswas'));
+
+        return view('manajement.siswa.index', compact('siswas', 'kelas','firstDate'));
     }
 
     public function create()
@@ -136,5 +148,20 @@ class SiswaController extends Controller
         $siswas = Siswa::findOrFail($id);
         $siswas->delete();
         return back()->with('success','Berhasil Hapus Data');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataSiswa', $namaFile);
+
+        Excel::import(new SiswaImport, public_path('/DataSiswa/'.$namaFile));
+        return redirect()->route('siswa.index')->with('success','Berhasil Import Data');
+    }
+
+    public function export()
+    {
+        return Excel::download(new SiswaExport, 'Siswa.xlsx');
     }
 }

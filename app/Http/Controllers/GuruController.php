@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GuruExport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
 {
@@ -21,8 +23,21 @@ class GuruController extends Controller
             });
         }
 
+        if($request->filled('jabatan')){
+            $query->where('jabatan', $request->jabatan);
+        }
+
+        if($request->filled('status')){
+            $query->where('status', $request->status);
+        }
+
+        if($request->filled('agama')){
+            $query->where('agama', $request->agama);
+        }
+
+        $firstDate = Guru::orderBy('created_at')->value('created_at');
         $gurus = $query->paginate(5)->appends($request->all());
-        return view('.manajement.guru.index',compact('gurus'));
+        return view('.manajement.guru.index',compact('gurus','firstDate'));
     }
 
     public function create()
@@ -110,5 +125,10 @@ class GuruController extends Controller
         $guru = Guru::findOrFail($id);
         $guru->delete();
         return back()->with('success','Berhasil Hapus Data');
+    }
+
+    public function export()
+    {
+        return Excel::download(new GuruExport, 'Guru.xlsx');
     }
 }

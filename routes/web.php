@@ -82,6 +82,7 @@ Route::post('/manajement/guru/create', [GuruController::class, 'store'])->name('
 Route::get('/manajement/guru/edit/{id}', [GuruController::class, 'edit'])->name('guru.edit');
 Route::post('/manajement/guru/edit/{id}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/manajement/guru/hapus/{id}', [GuruController::class, 'destroy'])->name('guru.hapus');
+Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export');
 });
 
 //ortu
@@ -92,6 +93,7 @@ Route::post('/manajement/ortu/create', [OrangTuaController::class, 'store'])->na
 Route::get('/manajement/ortu/edit/{id}', [OrangTuaController::class, 'edit'])->name('ortu.edit');
 Route::post('/manajement/ortu/edit/{id}', [OrangTuaController::class, 'update'])->name('ortu.update');
 Route::delete('/manajement/ortu/destroy/{id}', [OrangTuaController::class, 'destroy'])->name('ortu.hapus');
+Route::get('/exportOrangTua', [OrangTuaController::class,'export'])->name('ortu.export');
 });
 
 //siswa
@@ -102,6 +104,8 @@ Route::post('/manajement/siswa/create', [SiswaController::class, 'store'])->name
 Route::get('/manajement/siswa/edit/{id}', [SiswaController::class, 'edit'])->name('siswa.edit');
 Route::post('/manajement/siswa/edit/{id}', [SiswaController::class, 'update'])->name('siswa.update');
 Route::delete('/manajement/siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
+Route::post('/importSiswa', [SiswaController::class, 'import'])->name('siswa.import');
+Route::get('/exportSiswa', [SiswaController::class, 'export'])->name('siswa.import');
 });
 
 //Kelas
@@ -112,6 +116,7 @@ Route::post('/manajement/kelas/create', [KelasController::class,'store'])->name(
 Route::get('/manajement/kelas/edit/{id}', [KelasController::class,'edit'])->name('kelas.edit');
 Route::post('/manajement/kelas/edit/{id}', [KelasController::class,'update'])->name('kelas.update');
 Route::delete('/manajement/kelas/destroy/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
+Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.export');
 });
 
 //contact untuk hubugin bang costaaja .. wop

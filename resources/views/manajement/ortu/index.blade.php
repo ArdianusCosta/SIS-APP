@@ -33,7 +33,61 @@
                             <a href="{{route('ortu.create')}}" class="btn btn-success float-right">Tambah Data Orang Tua</a>
                         </h4>
                     </div>
-                    <div class="card-body">
+
+                    <form action="#" method="get">
+                        <div class="container-fluid p-3" style="background-color: #343536">
+                            <div class="row">
+                                @php
+                                    $dateStart = request('date_start') ?? \Carbon\Carbon::parse($firstDate)->format('Y-m-d');
+                                @endphp
+
+                                <div class="col-md-3 mb-2">
+                                    <input type="date" name="date_start" value="{{ $dateStart }}" class="form-control">
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <input type="date" name="date_end" value="{{ request('date_end') }}" class="form-control">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <button type="submit" class="btn btn-warning btn-block">Filter</button>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <a href="{{route('ortu.export')}}" class="btn btn-warning btn-block">EXPORT</a>
+                                </div>
+
+                                <div class="col-md-2 mb-2">
+                                    <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModalCenter">IMPORT</a>
+                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Import Data Orang Tua</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                        <form action="{{route('siswa.import')}}" method="post" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                        @csrf
+                                                        <input type="file" name="file" required>
+                                                </div>
+                                            </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Selesai</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                            </div>
+                                        </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  
+                        </div>
+                    </form>
+
+                    {{-- <div class="card-body"> --}}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -106,7 +160,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>
