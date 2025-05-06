@@ -80,12 +80,12 @@ Route::post('/manajement/guru/create', [GuruController::class, 'store'])->name('
 Route::get('/manajement/guru/edit/{id}', [GuruController::class, 'edit'])->name('guru.edit');
 Route::post('/manajement/guru/edit/{id}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/manajement/guru/hapus/{id}', [GuruController::class, 'destroy'])->name('guru.hapus');
-<<<<<<< HEAD
 Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export');
-=======
 //kontak
 Route::get('/kontak-guru/index', [GuruController::class, 'kontakGuru'])->name('kontak-guru');
->>>>>>> absensi/scan
+Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export');
+//kontak
+Route::get('/kontak-guru/index', [GuruController::class, 'kontakGuru'])->name('kontak-guru');
 });
 
 //ortu
