@@ -35,13 +35,17 @@
                   </li>
                   <li class="small">
                     <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                    No HP #: {{ $guru->telepon ?? '-' }}
+                    No HP #: {{ $guru->no_telepon ?? '-' }}
                   </li>
                 </ul>
               </div>
               <div class="col-5 text-center">
-                <img src="{{ $guru->foto_url ?? asset('admin/dist/img/user1-128x128.jpg') }}" alt="Foto Guru" class="img-circle img-fluid">
-              </div>
+                <img 
+                src="{{ asset('storage/' . $guru->img)}}" 
+                alt="Foto Guru" 
+                class="img-fluid rounded-circle"
+                style="width: 128px; height: 128px; object-fit: cover;">
+                </div>
             </div>
           </div>
           <div class="card-footer">

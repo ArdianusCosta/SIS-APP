@@ -128,6 +128,7 @@ $title = 'Guru';
                             <table class="table">
                                 <thead>
                                     <th class="text-center">No</th>
+                                    <th class="text-center">Foto Guru</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Jabatan</th>
@@ -138,12 +139,26 @@ $title = 'Guru';
                                     <th class="text-center">Agama</th>
                                     <th class="text-center">Tempat, tanggal Lahir</th>
                                     <th class="text-center">Alamat</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Nomor Telepon Guru</th>
                                     <th class="text-center">Aksi</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($gurus as $guru)
                                         <tr>
                                             <td class="text-center">{{$gurus->firstItem() + $loop->index}}</td>
+                                            <td class="text-center">
+                                                @if ($guru->img)
+                                                    <img 
+                                                        src="{{ asset('storage/' . $guru->img) }}" 
+                                                        alt="Foto Guru" 
+                                                        width="64" 
+                                                        height="64" 
+                                                        style="object-fit: cover; border-radius: 50%;">
+                                                @else
+                                                    <span>Tidak ada foto</span>
+                                                @endif
+                                            </td>                                                                                                    
                                             <td class="text-center">{{$guru->nama}}</td>
                                             <td class="text-center">{{$guru->status}}</td>
                                             <td class="text-center">{{$guru->jabatan}}</td>
@@ -155,6 +170,8 @@ $title = 'Guru';
                                             <td class="text-center">{{ $guru->tempat_lahir }}, {{ \Carbon\Carbon::parse($guru->tanggal_lahir)->translatedFormat('d F Y') }}</td>
                                             {{-- <td>{{$guru->tanggal_lahir}}</td> --}}
                                             <td class="text-center">{{$guru->alamat}}</td>
+                                            <td class="text-center">{{$guru->email}}</td>
+                                            <td class="text-center">{{$guru->no_telepon}}</td>
                                             <td class="text-center">
                                                 <div class="d-grid gap-2">
                                                     <a href="{{route('guru.edit', $guru->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>

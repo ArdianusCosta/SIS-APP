@@ -105,6 +105,18 @@
                                     <label>Tanggal Lahir</label>
                                     <input type="date" name="tanggal_lahir" class="form-control" required>
                                 </div>
+                                <div class="col-6 mb-3">
+                                    <label>Email</label>
+                                    <input type="email" name="email" class="form-control">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label>Nomor Telepon Guru</label>
+                                    <input type="number" name="no_telepon" class="form-control" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label>Foto</label>
+                                    <input type="file" name="img" class="form-control">
+                                </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label>Alamat</label>

@@ -105,6 +105,23 @@
                                     <label>Tanggal Lahir</label>
                                     <input type="date" name="tanggal_lahir" class="form-control" value="{{$guru->tanggal_lahir}}" required>
                                 </div>
+                                <div class="col-6 mb-3">
+                                    <label>Email</label>
+                                    <input type="email" name="email" value="{{$guru->email}}" class="form-control">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label>Nomor Telepon Guru</label>
+                                    <input type="number" name="no_telepon" value="{{$guru->no_telepon}}" class="form-control" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label>Foto</label>
+                                    <input type="file" name="img" class="form-control">
+                                    @if ($guru->img)
+                                        <div class="mt-2">
+                                            <img src="{{ asset('storage/' . $guru->img) }}" alt="Foto Lama" width="100" class="img-thumbnail">
+                                        </div>
+                                    @endif
+                                </div>                                
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label>Alamat</label>

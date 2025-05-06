@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\GuruExport;
 use App\Models\Guru;
+use App\Exports\GuruExport;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
@@ -59,7 +61,15 @@ class GuruController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required',
+            'email' => 'nullable|email',
+            'no_telepon' => 'nullable|unique:gurus,no_telepon',
+            'img' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $file->store('foto-guru', 'public');
+        }        
 
         Guru::create([
             'nama' => $request->nama,
@@ -73,6 +83,9 @@ class GuruController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'alamat' => $request->alamat,
+            'email' => $request->email,
+            'no_telepon' => $request->no_telepon,
+            'img' => $path ?? null,
         ]);
 
         return redirect()->route('guru.index')->with('success','Berhasil Tambah Data');
@@ -100,7 +113,20 @@ class GuruController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required',
+            'email' => 'nullable|email',
+            'no_telepon' => ['nullable',Rule::unique('gurus', 'no_telepon')->ignore($id),],
         ]);
+
+        if ($request->hasFile('img')) {
+            // Hapus foto lama jika ada
+            if ($guru->img && \Storage::disk('public')->exists($guru->img)) {
+                Storage::disk('public')->delete($guru->img);
+            }
+        
+            $file = $request->file('img');
+            $path = $file->store('foto-guru', 'public');
+            $guru->img = $path;
+        }        
 
         $guru->update([
             'nama' => $request->nama,
@@ -114,6 +140,9 @@ class GuruController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'alamat' => $request->alamat,
+            'email' => $request->email,
+            'no_telepon' => $request->no_telepon,
+            'img' => $path ?? null,
         ]);
 
         $guru->save();
