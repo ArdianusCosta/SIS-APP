@@ -97,6 +97,7 @@ Route::get('/manajement/ortu/edit/{id}', [OrangTuaController::class, 'edit'])->n
 Route::post('/manajement/ortu/edit/{id}', [OrangTuaController::class, 'update'])->name('ortu.update');
 Route::delete('/manajement/ortu/destroy/{id}', [OrangTuaController::class, 'destroy'])->name('ortu.hapus');
 Route::get('/exportOrangTua', [OrangTuaController::class,'export'])->name('ortu.export');
+Route::post('/importOrangTua', [OrangTuaController::class, 'import'])->name('ortu.import');
 });
 
 //siswa

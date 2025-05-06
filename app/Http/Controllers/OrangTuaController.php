@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\OrangTuaExport;
 use App\Models\OrangTua;
 use Illuminate\Http\Request;
+use App\Exports\OrangTuaExport;
+use App\Imports\OrangTuaImport;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrangTuaController extends Controller
@@ -163,5 +165,20 @@ class OrangTuaController extends Controller
     public function export()
     {
         return Excel::download(new OrangTuaExport, 'OrangTua.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls',
+        ]);
+
+        try {
+            Excel::import(new OrangTuaImport, $request->file('file'));
+            return redirect()->back()->with('success', 'Data orang tua berhasil diimport!');
+        } catch (\Exception $e) {
+            Log::error('Import Gagal: '.$e->getMessage());
+            return redirect()->back()->with('error', 'Import gagal: '.$e->getMessage());
+        }
     }
 }

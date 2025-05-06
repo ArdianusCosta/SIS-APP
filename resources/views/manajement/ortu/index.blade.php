@@ -65,7 +65,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             </div>
-                                        <form action="{{route('siswa.import')}}" method="post" enctype="multipart/form-data">
+                                        <form action="{{route('ortu.import')}}" method="post" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                         @csrf
