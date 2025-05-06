@@ -50,10 +50,8 @@ Route::post('/absensi/input/create', [AbsensiController::class, 'store'])->name(
 Route::get('/absensi/input/cari', [AbsensiController::class, 'cariSiswa']);
 //scan
 Route::get('/absensi/scan/index-scan', [AbsensiController::class, 'indexScan'])->name('index-scan');
-Route::post('/absensi/scan/index-scan', [AbsensiController::class, 'submit'])->name('indexScan-submit');
-
-// Halaman scan kamera QR
-Route::get('/absensi/scan/scan-qrcode', [AbsensiController::class, 'scanQrcode'])->name('scan-qrcode');
+Route::post('/absensi/scan/index-scan', [AbsensiController::class, 'generateQr'])->name('generate-qr.code');
+Route::get('/absensi/scan/scan-kamera', [AbsensiController::class, 'scanKamera'])->name('scan-kamera');
 });
 
 //informasi & penggumuman 
@@ -82,7 +80,12 @@ Route::post('/manajement/guru/create', [GuruController::class, 'store'])->name('
 Route::get('/manajement/guru/edit/{id}', [GuruController::class, 'edit'])->name('guru.edit');
 Route::post('/manajement/guru/edit/{id}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/manajement/guru/hapus/{id}', [GuruController::class, 'destroy'])->name('guru.hapus');
+<<<<<<< HEAD
 Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export');
+=======
+//kontak
+Route::get('/kontak-guru/index', [GuruController::class, 'kontakGuru'])->name('kontak-guru');
+>>>>>>> absensi/scan
 });
 
 //ortu

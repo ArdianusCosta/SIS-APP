@@ -126,9 +126,4 @@ class GuruController extends Controller
         $guru->delete();
         return back()->with('success','Berhasil Hapus Data');
     }
-
-    public function export()
-    {
-        return Excel::download(new GuruExport, 'Guru.xlsx');
-    }
 }

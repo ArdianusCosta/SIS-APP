@@ -67,22 +67,36 @@ class AbsensiController extends Controller
         return view('absensi.scan.index-scan');
     }
 
-    public function submit(Request $request)
+    public function generateQr(Request $request)
     {
         $this->validate($request, [
             'link' => 'required|url',
         ]);
-
+    
         $uid = time();
-        $qr = QrCode::format('png')->generate($request->link);
-        $qrImageName = $uid . '.png';
-
+        $qr = QrCode::format('svg')->generate($request->link);
+        $qrImageName = $uid . '.svg';
+    
+        // Simpan QR ke storage (opsional, kalau hanya ingin tampilkan langsung tidak perlu simpan)
         Storage::put('public/qr/' . $qrImageName, $qr);
+    
+        // Misalnya kamu punya `nis`, dan ambil data siswa dari database
+        $nis = $request->get('nis'); // opsional
+        $foto = null;
+    
+        if ($nis) {
+            $siswa = \App\Models\Siswa::where('nis', $nis)->first();
+            $foto = $siswa?->foto;
+        }
+    
+        return view('absensi.scan.index-scan', [
+            'qr' => $qr,
+            'foto' => $foto,
+            'uid' => $uid,
+        ]);
+    }    
 
-        return view('absensi.scan.scan-qrcode', compact('uid'));
-    }
-
-    public function scanQrcode()
+    public function scanKamera()
     {
         return view('absensi.scan.scan-kamera');
     }
