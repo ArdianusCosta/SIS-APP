@@ -111,4 +111,10 @@ class GuruController extends Controller
         $guru->delete();
         return back()->with('success','Berhasil Hapus Data');
     }
+
+    public function kontakGuru()
+    {
+        $gurus = Guru::orderBy('id', 'asc')->get();
+        return view('kontak-guru.index', compact('gurus'));
+    }
 }
