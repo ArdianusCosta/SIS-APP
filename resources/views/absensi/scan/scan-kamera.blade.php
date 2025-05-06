@@ -6,10 +6,6 @@
 
     <div id="reader" style="width:450px;"></div>
 
-    <form id="absensi-form" action="{{ route('indexScan-submit') }}" method="POST" style="display:none;">
-        @csrf
-        <input type="hidden" name="nis" id="nis">
-    </form>
 </div>
 @endsection
 

@@ -131,4 +131,10 @@ class GuruController extends Controller
     {
         return Excel::download(new GuruExport, 'Guru.xlsx');
     }
+    
+    public function kontakGuru()
+    {
+        $gurus = Guru::orderBy('id', 'asc')->get();
+        return view('kontak-guru.index', compact('gurus'));
+    }
 }

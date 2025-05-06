@@ -113,7 +113,7 @@
           @endauth
 
           @auth
-              @if (in_array(auth()->user()->role, ['admin','guru',]))
+              @if (in_array(auth()->user()->role, ['admin','guru']))
                 <li class="nav-header">Halaman Absensi</li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
@@ -125,7 +125,13 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="{{ route('scan-qrcode') }}" class="nav-link {{ request()->routeIs('scan-qrcode') ? 'active' : '' }}">
+                      <a href="{{ route('index-scan') }}" class="nav-link {{ request()->routeIs('index-scan') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Generate QR Code</p>
+                    </a>                    
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ route('scan-kamera') }}" class="nav-link {{ request()->routeIs('scan-kamera') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Absensi Scan</p>
                     </a>                    
@@ -198,6 +204,12 @@
                   <p>Penggumuman</p>
                 </a>
               </li>
+                <li class="nav-item">
+                  <a href="{{route('kontak-guru')}}" class="nav-link {{request()->routeIs('kontak-guru') ? 'active' : ''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kontak Guru</p>
+                  </a>
+                </li>
               @auth
                 @if (in_array(auth()->user()->role, ['admin','guru']))
                   <li class="nav-item">
