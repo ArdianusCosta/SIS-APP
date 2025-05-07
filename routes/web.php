@@ -11,6 +11,8 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\SuratKeluarSekolahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,6 +90,10 @@ Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export'
 Route::get('/kontak-guru/index', [GuruController::class, 'kontakGuru'])->name('kontak-guru');
 });
 
+Route::middleware(['auth','check.status','role:admin,guru,murid'])->group(function (){
+Route::get('/kontak-guru/index', [GuruController::class, 'kontakGuru'])->name('kontak-guru');   
+});
+
 //ortu
 Route::middleware(['auth','check.status','role:admin,guru'])->group(function (){
 Route::get('/manajement/ortu/index', [OrangTuaController::class, 'index'])->name('ortu.index');
@@ -123,5 +129,18 @@ Route::delete('/manajement/kelas/destroy/{id}', [KelasController::class,'destroy
 Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.export');
 });
 
-//contact untuk hubugin bang costaaja .. wop
+//contact untuk hubugin bang costaaja .. wop tapi belum jadi
 Route::get('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'index'])->name('contact-to-speedseat.index');
+
+//surat
+Route::middleware(['auth','check.status','role:admin,guru,murid'])->group(function(){
+Route::get('/surat-izin/index', [SuratController::class, 'index'])->name('surat.index');
+Route::get('/surat-izin/keluar-kelas/create', [SuratController::class, 'createKeluarKelas'])->name('keluar-kelas.create');
+Route::post('/surat-izin/keluar-kelas/create', [SuratController::class, 'storeKeluarKelas'])->name('keluar-kelas.store');
+Route::get('/surat-izin/keluar-kelas/surat/{id}', [SuratController::class, 'showKeluarKelas'])->name('keluar-kelas.surat');
+    
+Route::get('/surat-izin/keluar-sekolah/create', [SuratController::class, 'createKeluarSekolah'])->name('keluar-sekolah.create');
+Route::post('/surat-izin/keluar-sekolah/create', [SuratController::class, 'storeKeluarSekolah'])->name('keluar-sekolah.store');
+Route::get('/surat-izin/keluar-sekolah/surat/{id}', [SuratController::class, 'showKeluarSekolah'])->name('keluar-sekolah.surat');
+    
+});

@@ -160,7 +160,7 @@
           @endauth
 
           @auth
-            @if (in_array(auth()->user()->role, ['admin','guru']))
+            @if (in_array(auth()->user()->role, ['admin','guru','murid']))
                 <li class="nav-header">Halaman Aktivitas</li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
@@ -172,21 +172,25 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="../charts/inline.html" class="nav-link">
+                      <a href="{{route('surat.index')}}" class="nav-link {{request()->routeIs('surat.index')}}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Surat Izin</p>
                       </a>
                     </li>
+                @endif
+          @endauth
+                    @auth
+                    @if (in_array(auth()->user()->role, ['admin','guru']))
                     <li class="nav-item">
                       <a href="../charts/uplot.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Export Laporan</p>
                       </a>
                     </li>
+                    @endif
+                    @endauth
                   </ul>
                 </li>
-            @endif
-          @endauth
 
           <li class="nav-header">Informasi & Penggumuman</li>
           <li class="nav-item">
