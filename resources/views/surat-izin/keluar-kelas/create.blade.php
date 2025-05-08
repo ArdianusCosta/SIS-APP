@@ -14,7 +14,6 @@
     @include('layouts.inc.alert')
 
     <div class="container-fluid">
-        <!-- Menampilkan notifikasi di bawah header, dengan ukuran yang lebih kecil -->
         @if ($surat->isEmpty())
             <div class="alert alert-warning alert-dismissible fade show mb-3" role="alert" style="font-size: 14px;">
                 <strong>Perhatian!</strong> Belum ada surat izin keluar kelas yang dibuat hari ini.
