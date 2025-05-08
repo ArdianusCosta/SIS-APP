@@ -30,7 +30,7 @@
         <div class="md:w-1/2 bg-[#999999] relative p-6 flex flex-col justify-center items-center">
             <a href="#" class="absolute top-6 right-6 bg-[#f8b9c0] text-black px-4 py-1 rounded-full text-sm hover:bg-[#f49da8]" onclick="window.history.back();return false;">Kembali</a>
             <h2 class="text-4xl font-bold text-black mb-6">Hubungi Developer</h2>
-            <img src="{{ asset('images/paper-plane.png') }}" alt="Paper Plane" class="w-48 md:w-64">
+            <img src="{{ asset('img/contact-dev.jpg') }}" alt="Paper Plane" class="w-48 md:w-64">
         </div>
     </div>
 
