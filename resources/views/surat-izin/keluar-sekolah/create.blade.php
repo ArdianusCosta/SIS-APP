@@ -38,20 +38,20 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Tanggal Surat</label>
+                                    <label>Tanggal Surat<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_surat" class="form-control" required>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Kepada Yth</label>
+                                    <label>Kepada Yth<span class="text-danger">*</span></label>
                                     <input type="text" name="kepada_yth" class="form-control" placeholder="Masukan nama guru..." required>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Nama</label>
+                                    <label>Nama<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="nama" required placeholder="Masukan nama anda...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Kelas & Jurusan Siswa</label>
-                                    <select name="kelas_id" class="form-control">
+                                    <label>Kelas & Jurusan Siswa<span class="text-danger">*</span></label>
+                                    <select name="kelas_id" required class="form-control">
                                         <option value="">-- Pilih Kelas --</option>
                                         @foreach ($kelas as $kela)
                                             <option value="{{$kela->id}}">{{$kela->kelas}} - {{$kela->jurusan}}</option>
@@ -59,11 +59,11 @@
                                     </select>                            
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label>Selama Jam</label>
-                                    <input type="number" name="jam_ke" class="form-control" placeholder="Masukan dari jam berapa - jam berapa...">
+                                    <label>Selama Jam<span class="text-danger">*</span></label>
+                                    <input type="number" required name="jam_ke" class="form-control" placeholder="Masukan dari jam berapa - jam berapa...">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label>Alasan</label>
+                                    <label>Alasan<span class="text-danger">*</span></label>
                                     <textarea name="pesan_keluar_sekolah" class="form-control" required placeholder="Masukan alasan"></textarea>
                                 </div>
     

@@ -31,13 +31,13 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label>Nama Pengirim (nama anda)</label>
+                  <label>Nama Pengirim (nama anda)<span class="text-danger">*</span></label>
                   <input type="text" name="nama_pengirim" class="form-control" required placeholder="Masukan nama anda...">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label>Email Penerima (email yang dituju)</label>
+                  <label>Email Penerima (email yang dituju)<span class="text-danger">*</span></label>
                   <input type="email" name="email" class="form-control" required placeholder="Masukan email penerima...">
                 </div>
               </div>
@@ -49,7 +49,7 @@
               </div>
               <div class="col-md-12">
                 <div class="mb-3">
-                  <label>Pesan (pesan yang ingin dikirim ke penerima)</label>
+                  <label>Pesan (pesan yang ingin dikirim ke penerima)<span class="text-danger">*</span></label>
                   <textarea name="pesan" required class="form-control" rows="5" placeholder="Masukan pesan yang ingin anda kirim..."></textarea>
                 </div>
               </div>

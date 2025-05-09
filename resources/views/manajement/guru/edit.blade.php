@@ -38,11 +38,11 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Nama</label>
+                                    <label>Nama<span class="text-danger">*</span></label>
                                     <input type="text" name="nama" class="form-control" value="{{$guru->nama}}" required placeholder="Masukan nama...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Status</label>
+                                    <label>Status<span class="text-danger">*</span></label>
                                     <select name="status" class="form-control" required>
                                         <option value="">-- Pilih Status --</option>
                                         <option value="Aktif" {{$guru->status == 'Aktif' ? 'selected' : ''}}>Aktif</option>
@@ -55,7 +55,7 @@
                                     </select>
                                 </div>                                
                                 <div class="col-6 mb-3">
-                                    <label>Jabatan</label>
+                                    <label>Jabatan<span class="text-danger">*</span></label>
                                     <select name="jabatan" class="form-control" required>
                                         <option value="">-- Pilih jabatan --</option>
                                         <option value="Guru" {{$guru->jabatan == 'Guru' ? 'selected' : ''}}>Guru</option>
@@ -70,7 +70,7 @@
                                     <input type="number" name="nik" class="form-control" value="{{$guru->nik}}" placeholder="Masukan nomor induk karyawan">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Pendidikan</label>
+                                    <label>Pendidikan<span class="text-danger">*</span></label>
                                     <input type="text" name="pendidikan" class="form-control" value="{{$guru->pendidikan}}" required placeholder="Masukan pendidikan...">
                                 </div>
                                 <div class="col-6 mb-3">
@@ -78,7 +78,7 @@
                                     <input type="text" name="mata_pelajaran" class="form-control" value="{{$guru->mata_pelajaran}}" placeholder="Masukan mata pelajaran...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Laki-laki" {{$guru->jenis_kelamin == 'Laki-laki' ? 'selected' : ''}}>Laki-laki</option>
@@ -86,7 +86,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Agama</label>
+                                    <label>Agama<span class="text-danger">*</span></label>
                                     <select name="agama" class="form-control" required>
                                         <option value="">-- Pilih agama --</option>
                                         <option value="Islam" {{$guru->agama == 'Islam' ? 'selected' : ''}}>Islam</option>
@@ -98,11 +98,11 @@
                                     </select>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Tempat Lahir</label>
+                                    <label>Tempat Lahir<span class="text-danger">*</span></label>
                                     <input type="text" name="tempat_lahir" class="form-control" value="{{$guru->tempat_lahir}}" required placeholder="Masukan tempat lahir">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Tanggal Lahir</label>
+                                    <label>Tanggal Lahir<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir" class="form-control" value="{{$guru->tanggal_lahir}}" required>
                                 </div>
                                 <div class="col-6 mb-3">
@@ -110,7 +110,7 @@
                                     <input type="email" name="email" value="{{$guru->email}}" class="form-control">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Nomor Telepon Guru</label>
+                                    <label>Nomor Telepon Guru<span class="text-danger">*</span></label>
                                     <input type="number" name="no_telepon" value="{{$guru->no_telepon}}" class="form-control" required>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -124,8 +124,8 @@
                                 </div>                                
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label>Alamat</label>
-                                        <textarea name="alamat" class="form-control" rows="5">{{$guru->alamat}}</textarea>
+                                        <label>Alamat<span class="text-danger">*</span></label>
+                                        <textarea name="alamat" required class="form-control" rows="5">{{$guru->alamat}}</textarea>
                                     </div>
                                 </div>
 

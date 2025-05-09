@@ -36,7 +36,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Nama Ayah</label>
+                                    <label>Nama Ayah<span class="text-danger">*</span></label>
                                     <input type="text" name="nama_ayah" class="form-control" required placeholder="Masukan nama ayah..." value="{{$orang_tua->nama_ayah}}">
 
                                     <label>Tempat Lahir Ayah</label>
@@ -46,7 +46,7 @@
                                     <label>Tanggal Lahir Ayah</label>
                                     <input type="date" name="tanggal_lahir_ayah" class="form-control" required value="{{$orang_tua->tanggal_lahir_ayah}}">
 
-                                        <label>Agama</label>
+                                        <label>Agama<span class="text-danger">*</span></label>
                                         <select name="agama_ayah" class="form-control" required>
                                             <option value="">-- Pilih agama --</option>
                                             <option value="Islam" {{$orang_tua->agama_ayah == 'Islam' ? 'selected' : ''}}>Islam</option>
@@ -57,20 +57,20 @@
                                             <option value="Konghucu" {{$orang_tua->agama_ayah == 'Konghucu' ? 'selected' : ''}}>Konghucu</option>
                                         </select>
                              
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin_ayah" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Laki-laki" {{ old('jenis_kelamin_ayah', $orang_tua->jenis_kelamin_ayah ?? '') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                     </select>
                                
-                                    <label>Pendidikan Terakhir Ayah</label>
+                                    <label>Pendidikan Terakhir Ayah<span class="text-danger">*</span></label>
                                     <select name="pendidikan_terakhir_ayah" required class="form-control">
                                         @foreach(['SD','SMP','SMA','SMK','D1','D2','D3','D4','S1','S2','S3'] as $edu)
                                             <option value="{{ $edu }}" {{ old('pendidikan_terakhir_ayah', $orang_tua->pendidikan_terakhir_ayah ?? '') == $edu ? 'selected' : '' }}>{{ $edu }}</option>
                                         @endforeach
                                     </select>
                            
-                                    <label>Pekerjaan Ayah</label>
+                                    <label>Pekerjaan Ayah<span class="text-danger">*</span></label>
                                     <input type="text" name="pekerjaan_ayah" class="form-control" required placeholder="Masukan pekerjaan ayah..." value="{{$orang_tua->pekerjaan_ayah}}">
                                
                                     <label>Nomor Telepon Ayah</label>
@@ -79,21 +79,21 @@
                                     <label>Alamat Email Ayah</label>
                                     <input type="email" name="email" class="form-control" placeholder="Masukan alamat email ayah..." value="{{$orang_tua->email}}">
                                
-                                    <label>Alamat</label>
+                                    <label>Alamat<span class="text-danger">*</span></label>
                                     <textarea name="alamat_ayah" class="form-control" rows="5" required placeholder="Masukan alamat...">{{$orang_tua->alamat_ayah}}</textarea>
                                 </div>
 
                                 <div class="col-6 mb-3">
-                                    <label>Nama Ibu</label>
+                                    <label>Nama Ibu<span class="text-danger">*</span></label>
                                     <input type="text" name="nama_ibu" class="form-control" required placeholder="Masukan nama ibu..." value="{{$orang_tua->nama_ibu}}">
                                     
                                     <label>Tempat Lahir Ibu</label>
                                     <input type="text" name="tempat_lahir_ibu" class="form-control" placeholder="Masukan tempat lahir ibu..." value="{{$orang_tua->tempat_lahir_ibu}}">
 
-                                    <label>Tanggal Lahir Ibu</label>
+                                    <label>Tanggal Lahir Ibu<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir_ibu" class="form-control" required value="{{$orang_tua->tanggal_lahir_ibu}}">
 
-                                        <label>Agama</label>
+                                        <label>Agama<span class="text-danger">*</span></label>
                                         <select name="agama_ibu" class="form-control" required>
                                             <option value="">-- Pilih agama --</option>
                                             <option value="Islam" {{$orang_tua->agama_ibu == 'Islam' ? 'selected' : ''}}>Islam</option>
@@ -104,20 +104,20 @@
                                             <option value="Konghucu" {{$orang_tua->agama_ibu == 'Konghucu' ? 'selected' : ''}}>Konghucu</option>
                                         </select>
 
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin_ibu" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Perempuan" {{ old('jenis_kelamin_ibu', $orang_tua->jenis_kelamin_ibu ?? '') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                     </select>
 
-                                    <label>Pendidikan Terakhir Ibu</label>
+                                    <label>Pendidikan Terakhir Ibu<span class="text-danger">*</span></label>
                                     <select name="pendidikan_terakhir_ibu" required class="form-control">
                                         @foreach(['SD','SMP','SMA','SMK','D1','D2','D3','D4','S1','S2','S3'] as $edu)
                                             <option value="{{ $edu }}" {{ old('pendidikan_terakhir_ibu', $orang_tua->pendidikan_terakhir_ibu ?? '') == $edu ? 'selected' : '' }}>{{ $edu }}</option>
                                         @endforeach
                                     </select>
 
-                                    <label>Pekerjaan Ibu</label>
+                                    <label>Pekerjaan Ibu<span class="text-danger">*</span></label>
                                     <input type="text" name="pekerjaan_ibu" class="form-control" required placeholder="Masukan pekerjaan ibu..." value="{{$orang_tua->pekerjaan_ibu}}">
 
                                     <label>Nomor Telepon Ibu</label>
@@ -126,7 +126,7 @@
                                     <label>Alamat Email Ibu</label>
                                     <input type="email" name="email1" class="form-control" placeholder="Masukan alamat email ibu..." value="{{$orang_tua->email1}}">
 
-                                    <label>Alamat</label>
+                                    <label>Alamat<span class="text-danger">*</span></label>
                                     <textarea name="alamat_ibu" class="form-control" rows="5" required placeholder="Masukan alamat...">{{$orang_tua->alamat_ibu}}</textarea>
                                 </div>
 

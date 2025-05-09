@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label>Nama Siswa</label>
+                                    <label>Nama Siswa<span class="text-danger">*</span></label>
                                     <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" required placeholder="Ketik nama siswa...">
                                     <input type="hidden" name="siswa_id" id="siswa_id">
                                     <div id="list_siswa" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
@@ -65,7 +65,7 @@
                             
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label>Kelas & Jurusan</label>
+                                    <label>Kelas & Jurusan<span class="text-danger">*</span></label>
                                     <select name="kelas_id" class="form-control" required>
                                         <option value="">-- Pilih Kelas & Jurusan --</option>
                                         @foreach ($kelas as $kela)
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label>Status Kehadiran</label>
+                                    <label>Status Kehadiran<span class="text-danger">*</span></label>
                                         <select name="status_kehadiran" class="form-control" required>
                                             <option value="">-- Pilih Status Kehadiran --</option>
                                             <option value="Hadir">Hadir</option>

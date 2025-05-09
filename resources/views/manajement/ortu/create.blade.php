@@ -36,17 +36,17 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Nama Ayah</label>
+                                    <label>Nama Ayah<span class="text-danger">*</span></label>
                                     <input type="text" name="nama_ayah" class="form-control" required placeholder="Masukan nama ayah">
 
                                     <label>Tempat Lahir Ayah</label>
                                     <input type="text" name="tempat_lahir_ayah" class="form-control" placeholder="Masukan tempat lahir ayah...">
 
                               
-                                    <label>Tanggal Lahir Ayah</label>
+                                    <label>Tanggal Lahir Ayah<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir_ayah" class="form-control" required>
 
-                                        <label>Agama</label>
+                                        <label>Agama<span class="text-danger">*</span></label>
                                         <select name="agama_ayah" class="form-control" required>
                                             <option value="">-- Pilih agama --</option>
                                             <option value="Islam">Islam</option>
@@ -57,13 +57,13 @@
                                             <option value="Konghucu">Konghucu</option>
                                         </select>
                              
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin_ayah" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                     </select>
                                
-                                    <label>Pendidikan Terakhir Ayah</label>
+                                    <label>Pendidikan Terakhir Ayah<span class="text-danger">*</span></label>
                                     <select name="pendidikan_terakhir_ayah" required class="form-control">
                                         <option value="">-- Pilih pendidikan terakhir --</option>
                                         <option value="SD">SD (Sekolah Dasar)</option>
@@ -79,7 +79,7 @@
                                         <option value="S3">S3 (Doktor)</option>
                                     </select>
                            
-                                    <label>Pekerjaan Ayah</label>
+                                    <label>Pekerjaan Ayah<span class="text-danger">*</span></label>
                                     <input type="text" name="pekerjaan_ayah" class="form-control" required placeholder="Masukan pekerjaan ayah...">
                                
                                     <label>Nomor Telepon Ayah</label>
@@ -88,21 +88,21 @@
                                     <label>Alamat Email Ayah</label>
                                     <input type="email" name="email" class="form-control" placeholder="Masukan alamat email ayah...">
                                
-                                    <label>Alamat</label>
+                                    <label>Alamat<span class="text-danger">*</span></label>
                                     <textarea name="alamat_ayah" class="form-control" rows="5" required placeholder="Masukan alamat..."></textarea>
                                 </div>
 
                                 <div class="col-6 mb-3">
-                                    <label>Nama Ibu</label>
+                                    <label>Nama Ibu<span class="text-danger">*</span></label>
                                     <input type="text" name="nama_ibu" class="form-control" required placeholder="Masukan nama ibu">
                                     
                                     <label>Tempat Lahir Ibu</label>
                                     <input type="text" name="tempat_lahir_ibu" class="form-control" placeholder="Masukan tempat lahir ibu...">
 
-                                    <label>Tanggal Lahir Ibu</label>
+                                    <label>Tanggal Lahir Ibu<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir_ibu" class="form-control" required>
 
-                                        <label>Agama</label>
+                                        <label>Agama<span class="text-danger">*</span></label>
                                         <select name="agama_ibu" class="form-control" required>
                                             <option value="">-- Pilih agama --</option>
                                             <option value="Islam">Islam</option>
@@ -113,13 +113,13 @@
                                             <option value="Konghucu">Konghucu</option>
                                         </select>
 
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin_ibu" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
 
-                                    <label>Pendidikan Terakhir Ibu</label>
+                                    <label>Pendidikan Terakhir Ibu<span class="text-danger">*</span></label>
                                     <select name="pendidikan_terakhir_ibu" required class="form-control">
                                         <option value="">-- Pilih pendidikan terakhir --</option>
                                         <option value="SD">SD (Sekolah Dasar)</option>
@@ -135,7 +135,7 @@
                                         <option value="S3">S3 (Doktor)</option>
                                     </select>
 
-                                    <label>Pekerjaan Ibu</label>
+                                    <label>Pekerjaan Ibu<span class="text-danger">*</span></label>
                                     <input type="text" name="pekerjaan_ibu" class="form-control" required placeholder="Masukan pekerjaan ibu...">
 
                                     <label>Nomor Telepon Ibu</label>
@@ -144,7 +144,7 @@
                                     <label>Alamat Email Ibu</label>
                                     <input type="email" name="email1" class="form-control" placeholder="Masukan alamat email ibu...">
 
-                                    <label>Alamat</label>
+                                    <label>Alamat<span class="text-danger">*</span></label>
                                     <textarea name="alamat_ibu" class="form-control" rows="5" required placeholder="Masukan alamat..."></textarea>
                                 </div>
 

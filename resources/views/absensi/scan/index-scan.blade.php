@@ -8,7 +8,7 @@
         <form action="{{ route('generate-qr.code') }}" method="POST" class="mb-5" style="width: 100%; max-width: 500px;">
             @csrf
             <div class="form-group">
-                <label for="link">Masukkan Link Absensi:</label>
+                <label for="link">Masukkan Link Absensi:<span class="text-danger">*</span></label>
                 <input type="url" name="link" id="link" class="form-control" placeholder="https://..." required>
             </div>
             <button type="submit" class="btn btn-primary mt-3 w-100">Generate QR Code</button>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\InfomasiController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrangTuaController;
@@ -142,5 +143,8 @@ Route::get('/surat-izin/keluar-kelas/surat/{id}', [SuratController::class, 'show
 Route::get('/surat-izin/keluar-sekolah/create', [SuratController::class, 'createKeluarSekolah'])->name('keluar-sekolah.create');
 Route::post('/surat-izin/keluar-sekolah/create', [SuratController::class, 'storeKeluarSekolah'])->name('keluar-sekolah.store');
 Route::get('/surat-izin/keluar-sekolah/surat/{id}', [SuratController::class, 'showKeluarSekolah'])->name('keluar-sekolah.surat');
-    
 });
+
+//informasi khusus
+Route::get('/informasi/index', [InfomasiController::class, 'index'])->name('informasi.index');
+Route::get('/informasi/create', [InfomasiController::class, 'create'])->name('informasi.create');

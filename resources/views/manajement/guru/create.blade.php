@@ -38,11 +38,11 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Nama</label>
+                                    <label>Nama<span class="text-danger">*</span></label>
                                     <input type="text" name="nama" class="form-control" required placeholder="Masukan nama...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Status</label>
+                                    <label>Status<span class="text-danger">*</span></label>
                                     <select name="status" class="form-control" required>
                                         <option value="">-- Pilih Status --</option>
                                         <option value="Aktif">Aktif</option>
@@ -55,7 +55,7 @@
                                     </select>
                                 </div>                                
                                 <div class="col-6 mb-3">
-                                    <label>Jabatan</label>
+                                    <label>Jabatan<span class="text-danger">*</span></label>
                                     <select name="jabatan" class="form-control" required>
                                         <option value="">-- Pilih jabatan --</option>
                                         <option value="Guru">Guru</option>
@@ -70,7 +70,7 @@
                                     <input type="number" name="nik" class="form-control" placeholder="Masukan nomor induk karyawan">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Pendidikan</label>
+                                    <label>Pendidikan<span class="text-danger">*</span></label>
                                     <input type="text" name="pendidikan" class="form-control" required placeholder="Masukan pendidikan...">
                                 </div>
                                 <div class="col-6 mb-3">
@@ -78,7 +78,7 @@
                                     <input type="text" name="mata_pelajaran" class="form-control" placeholder="Masukan mata pelajaran...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Jenis Kelamin</label>
+                                    <label>Jenis Kelamin<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin" class="form-control" required>
                                         <option value="">-- Pilih jenis kelamin --</option>
                                         <option value="Laki-laki">Laki-laki</option>
@@ -86,7 +86,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Agama</label>
+                                    <label>Agama<span class="text-danger">*</span></label>
                                     <select name="agama" class="form-control" required>
                                         <option value="">-- Pilih agama --</option>
                                         <option value="Islam">Islam</option>
@@ -102,7 +102,7 @@
                                     <input type="text" name="tempat_lahir" class="form-control" required placeholder="Masukan tempat lahir">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Tanggal Lahir</label>
+                                    <label>Tanggal Lahir<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir" class="form-control" required>
                                 </div>
                                 <div class="col-6 mb-3">
@@ -110,7 +110,7 @@
                                     <input type="email" name="email" class="form-control">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Nomor Telepon Guru</label>
+                                    <label>Nomor Telepon Guru<span class="text-danger">*</span></label>
                                     <input type="number" name="no_telepon" class="form-control" required>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -119,8 +119,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label>Alamat</label>
-                                        <textarea name="alamat" class="form-control" rows="5"></textarea>
+                                        <label>Alamat<span class="text-danger">*</span></label>
+                                        <textarea name="alamat" required class="form-control" rows="5"></textarea>
                                     </div>
                                 </div>
 

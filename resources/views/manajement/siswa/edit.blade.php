@@ -37,12 +37,12 @@
                             @csrf
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Nama Siswa</label>
+                                    <label>Nama Siswa<span class="text-danger">*</span></label>
                                     <input type="text" name="nama" class="form-control" value="{{$siswas->nama}}" required placeholder="Masukan nama siswa...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Kelas & Jurusan Siswa</label>
-                                    <select name="kelas_id" class="form-control">
+                                    <label>Kelas & Jurusan Siswa<span class="text-danger">*</span></label>
+                                    <select name="kelas_id" required class="form-control">
                                         <option value="">-- Pilih Kelas --</option>
                                         @foreach ($kelas as $kela)
                                             <option value="{{$kela->id}}" {{$siswas->kelas_id == $kela->id ? 'selected' : ''}}>{{$kela->kelas}} - {{$kela->jurusan}}</option>
@@ -65,11 +65,11 @@
                                     <input type="text" name="tempat_lahir" value="{{$siswas->tempat_lahir}}" class="form-control" placeholder="Masukan tempat lahir siswa...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Tanggal Lahir Siswa</label>
+                                    <label>Tanggal Lahir Siswa<span class="text-danger">*</span></label>
                                     <input type="date" name="tanggal_lahir" value="{{$siswas->tanggal_lahir}}" class="form-control" required>
                                 </div>
                                 <div class="col-6">
-                                    <label>Jenis Kelamin Siswa</label>
+                                    <label>Jenis Kelamin Siswa<span class="text-danger">*</span></label>
                                     <select name="jenis_kelamin" class="form-control" required>
                                         <option value="">-- Pilih Jenis Kelamin --</option>
                                         <option value="Laki-laki" {{ $siswas->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
@@ -77,12 +77,12 @@
                                     </select>                                    
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Nomor Induk Siswa (NIS)</label>
+                                    <label>Nomor Induk Siswa (NIS)<span class="text-danger">*</span></label>
                                     <input type="number" name="nis" value="{{$siswas->nis}}" class="form-control" required placeholder="Ketikan nis...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Agama Siswa</label>
-                                    <select name="agama" class="form-control">
+                                    <label>Agama Siswa<span class="text-danger">*</span></label>
+                                    <select name="agama" required class="form-control">
                                         <option value="">-- Pilih Agama --</option>
                                         <option value="Islam" {{$siswas->agama == 'Islam' ? 'selected' : ''}}>Islam</option>
                                         <option value="Kristen" {{$siswas->agama == 'Kristen' ? 'selected' : ''}}>Kristen </option>
@@ -105,7 +105,7 @@
                                     <input type="number" name="no_telepon" class="form-control" value="{{$siswas->no_telepon}}" placeholder="Ketikan nomor telepon...">
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <label>Alamat</label>
+                                    <label>Alamat<span class="text-danger">*</span></label>
                                     <textarea name="alamat" class="form-control" required placeholder="Masukan alamat...">{{$siswas->alamat}}</textarea>
                                 </div>
 

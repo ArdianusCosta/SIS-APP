@@ -39,21 +39,21 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="mb-3">
-                              <label>Nama</label>
+                              <label>Nama<span class="text-danger">*</span></label>
                               <input type="text" name="name" class="form-control" required placeholder="Masukan nama pengguna...">
                             </div>
                           </div>
                           
                           <div class="col-md-6">
                             <div class="mb-3">
-                              <label>Email</label>
+                              <label>Email<span class="text-danger">*</span></label>
                               <input type="email" name="email" class="form-control" required placeholder="Masukan email pengguna...">
                             </div>
                           </div>
 
                           <div class="col-md-6">
                             <div class="mb-3">
-                              <label>Password</label>
+                              <label>Password<span class="text-danger">*</span></label>
                               <input type="text" name="password" class="form-control" required placeholder="Masukan  password pengguna...">
                             </div>
                           </div>

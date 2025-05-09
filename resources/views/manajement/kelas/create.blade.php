@@ -37,8 +37,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6 mb-3">
-                                <label>Kelas</label>
-                                <select name="kelas" class="form-control">
+                                <label>Kelas<span class="text-danger">*</span></label>
+                                <select name="kelas" required class="form-control">
                                     <option value="">-- Pilih Kelas --</option>
                                     <option value="X">Kelas X</option>
                                     <option value="XI">Kelas XI</option>
@@ -46,8 +46,8 @@
                                 </select>
                             </div>
                             <div class="col-6 mb-3">
-                                <label>Jurusan</label>
-                                <select name="jurusan" class="form-control">
+                                <label>Jurusan<span class="text-danger">*</span></label>
+                                <select name="jurusan" required class="form-control">
                                     <option value="">-- Pilih Jurusan --</option>
                                     <option value="RPL">Rekayasa Perangkat Lunak (RPL)</option>
                                     <option value="DKV">Desain Komunikasi Visual (DKV)</option>
@@ -57,8 +57,8 @@
                                 </select>
                             </div>
                             <div class="col-12 mb-3">
-                                <label>Wali Kelas</label>
-                                <select name="wali_kelas_id" class="form-control">
+                                <label>Wali Kelas<span class="text-danger">*</span></label>
+                                <select name="wali_kelas_id" required class="form-control">
                                     <option value="">-- Pilih Wali Kelas --</option>
                                     @foreach ($gurus as $guru)
                                         <option value="{{$guru->id}}">{{$guru->nama}}</option>
