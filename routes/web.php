@@ -148,3 +148,4 @@ Route::get('/surat-izin/keluar-sekolah/surat/{id}', [SuratController::class, 'sh
 //informasi khusus
 Route::get('/informasi/index', [InfomasiController::class, 'index'])->name('informasi.index');
 Route::get('/informasi/create', [InfomasiController::class, 'create'])->name('informasi.create');
+Route::post('/informasi/create', [InfomasiController::class, 'store'])->name('informasi.store');

@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('informasis', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('kategori')->nullable();
-            $table->text('isi')->nullable();
-            $table->date('tanggal')->nullable();
+            $table->enum('kategori',['Pengumuman','Jadwal Acara','Kegiatan Akademik','Ekstrakurikuler','Organisasi Sekolah','Pelayanan']);
+            $table->text('isi');
+            $table->date('tanggal');
             $table->string('lampiran')->nullable();
             $table->timestamps();
         });

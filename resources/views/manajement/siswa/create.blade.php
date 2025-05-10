@@ -98,13 +98,13 @@
                                     <label>Email Siswa</label>
                                     <input type="email" name="email" class="form-control" placeholder="Masukan email...">
                                 </div>
-                                <div class="col-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <label>Nomor Telepon Siswa</label>
                                     <input type="number" name="no_telepon" class="form-control" placeholder="Ketikan nomor telepon...">
                                 </div>
-                                <div class="col-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <label>Alamat<span class="text-danger">*</span></label>
-                                    <textarea name="alamat" class="form-control" required placeholder="Masukan alamat..."></textarea>
+                                    <textarea name="alamat" class="form-control" rows="5" required placeholder="Masukan alamat..."></textarea>
                                 </div>
 
                                 <div class="col-12 mb-3 text-center">

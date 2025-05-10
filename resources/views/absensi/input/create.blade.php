@@ -117,7 +117,7 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label>Keterangan</label>
-                                    <textarea name="keterangan" class="form-control"></textarea>
+                                    <textarea name="keterangan" class="form-control" rows="5"></textarea>
                                 </div>
                             </div>
 

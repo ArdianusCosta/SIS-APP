@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label>Alasan<span class="text-danger">*</span></label>
-                                    <textarea name="pesan_keluar_sekolah" class="form-control" required placeholder="Masukan alasan"></textarea>
+                                    <textarea name="pesan_keluar_sekolah" rows="5" class="form-control" required placeholder="Masukan alasan"></textarea>
                                 </div>
     
                                 <div class="col-12 mt-3 text-center">
