@@ -7,7 +7,7 @@
       <h1 class="m-0">Informasi & Pengumuman</h1>
     </div>
     <div class="col-sm-6 text-sm-right">
-      <a href="{{ route('informasi.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Buat Informasi</a>
+      <a href="{{ route('informasi.create') }}" class="btn btn-success">Buat Informasi</a>
     </div>
   </div>
 </div>
@@ -150,10 +150,6 @@
         <p class="text-muted">Belum ada informasi tersedia.</p>
       </div>
       @endforelse
-    </div>
-
-    <div class="mt-4">
-      {{ $informasis->links() }}
     </div>
   </div>
 </div>

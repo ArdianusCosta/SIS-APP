@@ -151,15 +151,15 @@
         @endauth
 
         <li class="nav-header">Informasi & Penggumuman</li>
-        @php $informasiRoutes = ['kontak-guru', 'email.create']; @endphp
-        <li class="nav-item {{ in_array(Route::currentRouteName(), $informasiRoutes) ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), $informasiRoutes) ? 'active' : '' }}">
+        @php $informasiRoutes = ['kontak-guru', 'email.create','informasi.*']; @endphp
+        <li class="nav-item {{ request()->routeIs('kontak-guru', 'email.create', 'informasi.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->routeIs('kontak-guru', 'email.create', 'informasi.*') ? 'active' : '' }}">        
             <i class="nav-icon fas fa-bullhorn"></i>
             <p>Informasi<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('informasi.index')}}" class="nav-link">
+              <a href="{{route('informasi.index')}}" class="nav-link {{request()->routeIs('informasi.index') ? 'active' : ''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Info & Penggumuman</p>
               </a>

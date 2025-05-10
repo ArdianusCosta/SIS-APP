@@ -9,7 +9,7 @@ class InfomasiController extends Controller
 {
     public function index()
     {
-        $informasis = Informasi::paginate(5);
+        $informasis = Informasi::all();
         return view('informasi.index', compact('informasis'));
     }
 
