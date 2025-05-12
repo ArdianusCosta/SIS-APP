@@ -146,6 +146,10 @@ Route::get('/surat-izin/keluar-sekolah/surat/{id}', [SuratController::class, 'sh
 });
 
 //informasi khusus
+Route::middleware(['auth','check.status','role:admin,guru,murid'])->group(function(){
 Route::get('/informasi/index', [InfomasiController::class, 'index'])->name('informasi.index');
+});
+Route::middleware(['auth','check.status','role:admin,guru'])->group(function(){
 Route::get('/informasi/create', [InfomasiController::class, 'create'])->name('informasi.create');
 Route::post('/informasi/create', [InfomasiController::class, 'store'])->name('informasi.store');
+});

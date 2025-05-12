@@ -35,6 +35,10 @@
                             <textarea name="isi" class="form-control" rows="5" required placeholder="Masukan isi informasi/berita..."></textarea>
                         </div>
                         <div class="col-12 mb-3">
+                            <label>Foto</label>
+                            <input type="file" name="foto" class="form-control">
+                        </div>
+                        <div class="col-12 mb-3">
                             <label>Tanggal Pembuatan Informasi/Berita<span class="text-danger">*</span></label>
                             <input type="date" name="tanggal" class="form-control">
                         </div>

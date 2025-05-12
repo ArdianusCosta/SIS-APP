@@ -24,11 +24,18 @@ class InfomasiController extends Controller
             'judul' => 'required',
             'kategori' => 'required|in:Pengumuman,Jadwal Acara,Kegiatan Akademik,Ekstrakurikuler,Organisasi Sekolah,Pelayanan',
             'isi' => 'required',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,svg',
             'tanggal' => 'required|date',
-            'lampiran' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png,ppt,pptx,zip|max:5120',
+            'lampiran' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png,ppt,pptx,zip|max:10240',
         ]);
-
+        
+        $fotoPath = null;
         $lampiranPath = null;
+        
+        if($request->hasFile('foto')){
+            $fotoPath = $request->file('foto')->store('informasi-foto', 'public');
+        }
+        
         if($request->hasFile('lampiran')){
             $lampiranPath = $request->file('lampiran')->store('informasi-berita', 'public');
         }
@@ -38,8 +45,9 @@ class InfomasiController extends Controller
             'kategori' => $request->kategori,
             'isi' => $request->isi,
             'tanggal' => $request->tanggal,
+            'foto' => $fotoPath,
             'lampiran' => $lampiranPath,
-        ]);
-        return redirect()->route('informasi.index')->with('success','Berhasil buat Informasi/Berita');
+        ]);        
+        return redirect()->route('informasi.index')->with('success','Berhasil buat Pengumuman');
     }
 }

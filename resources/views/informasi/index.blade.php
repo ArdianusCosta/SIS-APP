@@ -1,16 +1,20 @@
 @extends('layouts.main')
 
 @section('content-header')
-<div class="container-fluid">
-  <div class="row mb-2 align-items-center">
-    <div class="col-sm-6">
-      <h1 class="m-0">Informasi & Pengumuman</h1>
-    </div>
-    <div class="col-sm-6 text-sm-right">
-      <a href="{{ route('informasi.create') }}" class="btn btn-success">Buat Informasi</a>
+  <div class="container-fluid">
+    <div class="row mb-2 align-items-center">
+      <div class="col-sm-6">
+        <h1 class="m-0">Informasi & Pengumuman</h1>
+      </div>
+      @auth
+        @if (in_array(auth()->user()->role, ['admin','guru']))
+          <div class="col-sm-6 text-sm-right">
+            <a href="{{ route('informasi.create') }}" class="btn btn-success">Buat Informasi</a>
+          </div>
+        @endif
+      @endauth
     </div>
   </div>
-</div>
 @endsection
 
 @section('content')
@@ -18,14 +22,15 @@
 
 <div class="card card-solid">
   <div class="card-body">
+
     <ul class="nav nav-tabs mb-4" id="filterTabs">
       <li class="nav-item">
         <a class="nav-link active" href="#" data-filter="all"><i class="fas fa-list"></i> Semua</a>
       </li>
       @foreach (['Pengumuman', 'Jadwal Acara', 'Kegiatan Akademik', 'Ekstrakurikuler', 'Organisasi Sekolah', 'Pelayanan'] as $kategori)
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-filter="{{ Str::slug($kategori) }}">
-          <i class="{{ match($kategori) {
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-filter="{{ Str::slug($kategori) }}">
+            <i class="{{ match($kategori) {
               'Pengumuman' => 'fas fa-bullhorn',
               'Jadwal Acara' => 'fas fa-calendar-alt',
               'Kegiatan Akademik' => 'fas fa-book',
@@ -33,9 +38,9 @@
               'Organisasi Sekolah' => 'fas fa-users',
               'Pelayanan' => 'fas fa-hands-helping',
               default => 'fas fa-info-circle'
-          } }}"></i> {{ $kategori }}
-        </a>
-      </li>
+            } }}"></i> {{ $kategori }}
+          </a>
+        </li>
       @endforeach
     </ul>
 
@@ -50,22 +55,23 @@
 
     <div class="row" id="announcementList">
       @forelse ($informasis as $informasi)
-      <div class="col-12 col-md-6 col-lg-4 mb-4 announcement-item" data-category="{{ Str::slug($informasi->kategori) }}">
-        <div class="card h-100 shadow-sm bg-gradient-dark rounded-lg overflow-hidden">
-          @php
-            $isImage = $informasi->lampiran && Str::startsWith(mime_content_type(storage_path('app/public/' . $informasi->lampiran)), 'image/');
-          @endphp
-          <div class="card-img-wrapper">
-            <img 
-              src="{{ $isImage ? asset('storage/' . $informasi->lampiran) : '/admin/dist/img/default-info.jpg' }}" 
-              class="card-img-top" 
-              alt="Gambar {{ $informasi->judul }}"
-              style="height: 200px; object-fit: cover;"
-            >
-          </div>
-          <div class="card-img-overlay d-flex flex-column justify-content-end p-3">
-            <h5 class="card-title text-white mb-2">{{ $informasi->judul }}</h5>
-            <span class="badge mb-2 {{ match($informasi->kategori) {
+        @php
+          $imageExts = ['jpg', 'jpeg', 'png', 'svg'];
+          $fotoUrl = '/admin/dist/img/default-info.jpg';
+
+          if ($informasi->foto) {
+            $fotoUrl = asset('storage/' . $informasi->foto);
+          } elseif ($informasi->lampiran && in_array(strtolower(pathinfo($informasi->lampiran, PATHINFO_EXTENSION)), $imageExts)) {
+            $fotoUrl = asset('storage/' . $informasi->lampiran);
+          }
+        @endphp
+
+        <div class="col-12 col-md-6 col-lg-4 mb-4 announcement-item" data-category="{{ Str::slug($informasi->kategori) }}">
+          <div class="card h-100 shadow-sm rounded-lg overflow-hidden text-white border-0"
+               style="background: url('{{ $fotoUrl }}') center center / cover no-repeat;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end p-3" style="background: rgba(0,0,0,0.5);">
+              <h5 class="card-title mb-2 text-center">{{ $informasi->judul }}</h5>
+              <span class="badge mb-2 {{ match($informasi->kategori) {
                 'Pengumuman' => 'badge-primary',
                 'Jadwal Acara' => 'badge-info',
                 'Kegiatan Akademik' => 'badge-success',
@@ -73,82 +79,86 @@
                 'Organisasi Sekolah' => 'badge-secondary',
                 'Pelayanan' => 'badge-danger',
                 default => 'badge-dark'
-            } }}">{{ $informasi->kategori }}</span>
-            <p class="card-text text-white mb-2" style="font-size: 0.9rem;">
-              {{ Str::limit(strip_tags($informasi->isi), 100) }}
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <small class="text-white">{{ \Carbon\Carbon::parse($informasi->tanggal)->format('d M Y') }}</small>
-              <button 
-                type="button" 
-                class="btn btn-sm btn-primary" 
-                data-toggle="modal" 
-                data-target="#infoModal{{ $informasi->id }}"
-                aria-label="Lihat detail {{ $informasi->judul }}"
-              >
-                <i class="fas fa-info-circle"></i> Lihat Detail
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="infoModal{{ $informasi->id }}" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel{{ $informasi->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-          <div class="modal-content rounded-lg">
-            <div class="modal-header border-0">
-              <h5 class="modal-title" id="infoModalLabel{{ $informasi->id }}">{{ $informasi->judul }}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="text-center mb-4">
-                <img 
-                  src="{{ $isImage ? asset('storage/' . $informasi->lampiran) : '/admin/dist/img/default-info.jpg' }}" 
-                  alt="Gambar {{ $informasi->judul }}" 
-                  class="img-fluid rounded border" 
-                  style="max-height: 300px; width: auto; object-fit: cover;"
-                >
+              } }}">{{ $informasi->kategori }}</span>
+              <p class="card-text mb-2" style="font-size: 0.9rem;">
+                {{ Str::limit(strip_tags($informasi->isi), 100) }}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small>{{ \Carbon\Carbon::parse($informasi->tanggal)->format('d M Y') }}</small>
+                <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#infoModal{{ $informasi->id }}">
+                  <i class="fas fa-info-circle"></i> Lihat Detail
+                </button>
               </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Kategori:</strong> {{ $informasi->kategori }}</li>
-                <li class="list-group-item"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($informasi->tanggal)->format('d M Y') }}</li>
-                <li class="list-group-item"><strong>Isi:</strong> 
-                  <div class="mt-2">{!! $informasi->isi !!}</div>
-                </li>
-                @if ($informasi->lampiran)
-                <li class="list-group-item">
-                  <strong>Lampiran:</strong>
-                  @php
-                    $extension = pathinfo($informasi->lampiran, PATHINFO_EXTENSION);
-                    $icon = match($extension) {
-                        'pdf' => 'fas fa-file-pdf',
-                        'doc', 'docx' => 'fas fa-file-word',
-                        'jpg', 'jpeg', 'png' => 'fas fa-file-image',
-                        'xls', 'xlsx' => 'fas fa-file-excel',
-                        'ppt', 'pptx' => 'fas fa-file-powerpoint',
-                        'zip' => 'fas fa-file-archive',
-                        default => 'fas fa-file',
-                    };
-                  @endphp
-                  <a href="{{ asset('storage/' . $informasi->lampiran) }}" download class="btn btn-sm btn-outline-secondary">
-                    <i class="{{ $icon }}"></i> Unduh Lampiran
-                  </a>
-                </li>
-                @endif
-              </ul>
-            </div>
-            <div class="modal-footer border-0">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="modal fade" id="infoModal{{ $informasi->id }}" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel{{ $informasi->id }}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content rounded-lg overflow-hidden">
+
+              @if ($informasi->foto)
+                <div class="position-relative" style="height: 300px; background: url('{{ asset('storage/' . $informasi->foto) }}') center center / cover no-repeat;">
+                  <a href="{{ asset('storage/' . $informasi->foto) }}" target="_blank" class="position-absolute text-white" style="top: 10px; right: 10px; background: rgba(0,0,0,0.5); padding: 6px 10px; border-radius: 4px;">
+                    <i class="fas fa-search-plus"></i> Lihat Gambar
+                  </a>
+                </div>
+              @endif
+
+              <div class="modal-header border-0">
+                <h5 class="modal-title">{{ $informasi->judul }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group list-group-flush mb-3">
+                  <li class="list-group-item"><strong>Kategori:</strong> {{ $informasi->kategori }}</li>
+                  <li class="list-group-item"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($informasi->tanggal)->format('d M Y') }}</li>
+                  <li class="list-group-item"><strong>Isi:</strong> <div class="mt-2">{!! $informasi->isi !!}</div></li>
+
+                  @if ($informasi->lampiran)
+                    @php
+                      $ext = strtolower(pathinfo($informasi->lampiran, PATHINFO_EXTENSION));
+                      $isImage = in_array($ext, $imageExts);
+                    @endphp
+
+                    @unless($isImage)
+                      @php
+                        $icon = match($ext) {
+                          'pdf' => 'fas fa-file-pdf',
+                          'doc', 'docx' => 'fas fa-file-word',
+                          'xls', 'xlsx' => 'fas fa-file-excel',
+                          'ppt', 'pptx' => 'fas fa-file-powerpoint',
+                          'zip' => 'fas fa-file-archive',
+                          default => 'fas fa-file'
+                        };
+                      @endphp
+                      <li class="list-group-item">
+                        <strong>Lampiran:</strong>
+                        <a href="{{ asset('storage/' . $informasi->lampiran) }}" target="_blank" class="btn btn-outline-primary btn-sm mr-2">
+                          <i class="{{ $icon }}"></i> Lihat
+                        </a>
+                        <a href="{{ asset('storage/' . $informasi->lampiran) }}" download class="btn btn-outline-secondary btn-sm">
+                          <i class="fas fa-download"></i> Unduh
+                        </a>
+                      </li>
+                    @endunless
+                  @endif
+                </ul>
+              </div>
+              <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       @empty
-      <div class="col-12 text-center py-5">
-        <p class="text-muted">Belum ada informasi tersedia.</p>
-      </div>
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">Belum ada informasi tersedia.</p>
+        </div>
       @endforelse
     </div>
   </div>
@@ -156,59 +166,18 @@
 
 <style>
 .card.card-solid {
-  transform: none !important;
-  box-shadow: none !important;
-  transition: none !important;
+  border: none !important;
 }
 .announcement-item .card {
+  min-height: 300px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
 .announcement-item .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
-  z-index: 2;
-}
-.card-img-wrapper {
-  overflow: hidden;
-  position: relative;
-}
-.card-img-top {
-  transition: transform 0.3s ease;
-}
-.announcement-item .card:hover .card-img-top {
-  transform: scale(1.05);
-}
-.card-img-overlay {
-  background: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
-  transition: background 0.3s ease;
-}
-.announcement-item .card:hover .card-img-overlay {
-  background: linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
-}
-.badge {
-  font-size: 0.75rem;
-  padding: 0.4em 0.7em;
-  border-radius: 0.25rem;
-}
-.nav-tabs .nav-link {
-  border-radius: 0.25rem;
-  margin-right: 5px;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link.active {
   background-color: #e9ecef;
-}
-.modal-content {
-  background: #fff !important;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-.modal-backdrop {
-  opacity: 0.3 !important;
-}
-.input-group-text {
-  background-color: #f8f9fa;
 }
 </style>
 
