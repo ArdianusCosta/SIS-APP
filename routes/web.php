@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\ContactController;
@@ -153,3 +154,5 @@ Route::middleware(['auth','check.status','role:admin,guru'])->group(function(){
 Route::get('/informasi/create', [InfomasiController::class, 'create'])->name('informasi.create');
 Route::post('/informasi/create', [InfomasiController::class, 'store'])->name('informasi.store');
 });
+
+Route::get('/akademik/index', [AkademikController::class, 'index'])->name('akademik.index');

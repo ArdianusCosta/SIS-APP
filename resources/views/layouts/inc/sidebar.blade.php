@@ -54,7 +54,7 @@
             </li>
           @endif
 
-          @php $manajemenRoutes = ['guru.index', 'siswa.index', 'kelas.index', 'ortu.index']; @endphp
+          @php $manajemenRoutes = ['guru.index', 'siswa.index', 'kelas.index', 'ortu.index','akademik.index']; @endphp
           @if (in_array($user->role, ['admin','guru']))
             <li class="nav-header">Halaman Manajement</li>
             <li class="nav-item {{ in_array(Route::currentRouteName(), $manajemenRoutes) ? 'menu-open' : '' }}">
@@ -64,7 +64,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{route('akademik.index')}}" class="nav-link {{request()->routeIs('akademik.index') ? 'active' : ''}}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manajement Akademik</p>
                   </a>

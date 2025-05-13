@@ -97,7 +97,7 @@
 
         <footer class="text-center py-3">
             <small class="d-block text-muted">
-                &copy; 2025 <a href="https://github.com/ArdianusCosta" target="_blank" class="footer-link">SIS-APP</a>. All rights reserved.
+                &copy; 2025 <a href="https://github.com/ArdianusCosta" target="blank" class="footer-link">SIS-APP</a>. All rights reserved.
             </small>
         </footer>
     </section>
