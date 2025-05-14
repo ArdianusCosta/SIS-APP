@@ -133,6 +133,7 @@ Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.expor
 
 //contact untuk hubugin bang costaaja .. wop tapi belum jadi
 Route::get('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'index'])->name('contact-to-speedseat.index');
+Route::post('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'store'])->name('contact-to-speedseat.store');
 
 //surat
 Route::middleware(['auth','check.status','role:admin,guru,murid'])->group(function(){
