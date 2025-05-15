@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hubungi Developer - SIS-APP</title>
+    <link rel="icon" href="/img/logo-SIS.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen font-sans">
@@ -34,25 +35,30 @@
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const form = this;
-        const formData = new FormData(form);
-
-        fetch('https://script.google.com/macros/s/AKfycbx0YZJUJJdbHJ8zvNf8uSy24uehxO4rnWBRuk6NIMMwJLvCDX1A4i6Vik3e90q8nUCLyg/exec', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(response => {
-            alert('Pesan berhasil dikirim!');
-            form.reset();
-        })
-        .catch(error => {
-            console.error('Error!', error);
-            alert('Terjadi kesalahan saat mengirim.');
+            e.preventDefault();
+        
+            const formData = {
+                nama: this.nama.value,
+                phone: this.phone.value,
+                email: this.email.value,
+                pesan_to_costa: this.pesan_to_costa.value
+            };
+        
+            fetch('https://script.google.com/macros/s/AKfycbwU5U2e0qJl3WAdbcAAfrRbjsYdfPi-RRqrFuaMm_lzZCLTAaUPLL2LC38AncfHR7Xnjg/exec', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(r => r.json())
+            .then(response => {
+                alert('Pesan berhasil dikirim!');
+                document.getElementById('contactForm').reset();
+            })
+            .catch(error => alert('Gagal mengirim pesan.'));
         });
-    });
-
-    </script>
+        </script>
+        
 </body>
 </html>
