@@ -111,6 +111,32 @@
       background-color: #444;
     }
 
+    .btn-google-login {
+      background-color: #ffffff;
+      color: #010101;
+      font-weight: 500;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 0.7rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-google-login:hover {
+      background-color: #444;
+      box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    .google-icon {
+      width: 20px;
+      height: 20px;
+    }
+
     .alert-danger {
       background-color: #ff4d4d;
       border: none;
@@ -158,22 +184,28 @@
 
       @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+            <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
-    @endif
+      @endif
 
-      <form action="{{route('loginSukses')}}" method="POST" style="width: 100%; max-width: 400px;">
+      @if (session('error'))
+        <div class="alert alert-danger mt-3">
+            {{ session('error') }}
+        </div>
+      @endif
+
+      <form action="{{ route('loginSukses') }}" method="POST" style="width: 100%; max-width: 400px;">
         @csrf
         <div class="mb-3">
-          <label for="email" class="form-label">email</label>
+          <label for="email" class="form-label">Email</label>
           <input type="email" name="email" class="form-control" required autofocus placeholder="Masukkan email...">
         </div>
         <div class="mb-2">
-          <label for="password" class="form-label">password</label>
+          <label for="password" class="form-label">Password</label>
           <input type="password" name="password" class="form-control" required placeholder="Masukkan password...">
         </div>
 
@@ -185,8 +217,15 @@
           <a href="#">Lupa Password?</a>
         </div>
 
-        <div class="d-grid">
+        <div class="d-grid mb-3">
           <button type="submit" class="btn btn-login">Login</button>
+        </div>
+
+        <div class="d-grid mb-2">
+          <a href="{{ url('auth/google') }}" class="btn btn-google-login">
+            <img src="/img/login-google.png" alt="Google" class="google-icon">
+            <span>Login dengan Google</span>
+          </a>
         </div>
       </form>
 

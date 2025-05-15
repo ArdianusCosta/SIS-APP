@@ -26,19 +26,8 @@ class LoginController extends Controller
             $user = Auth::user();
             if($user->status == 0){
                 Auth::logout();
-                return redirect()->route('auth.login')->withErrors(['email'=>'Akun anda telah Dibanned, Tolong hubungi Admin untuk tindakan lebih lanjut']);
+                return redirect()->route('auth.login')->withErrors(['email'=>'Akun anda telah dibanned. Hubungi Admin untuk bantuan lebih lanjut.']);
             }   
-
-            // switch ($user->role) {
-            //     case 'admin':
-            //         return redirect()->route('user.index');
-            //     case 'guru':
-            //         return redirect()->route('absensi.index');
-            //     case 'siswa':
-            //         return redirect()->route('profile.index');
-            //     default: 
-            //         return redirect()->route('welcome');
-            // }
 
             return redirect('/')->with('success','Selamat Datang di SIS-APP');
         }

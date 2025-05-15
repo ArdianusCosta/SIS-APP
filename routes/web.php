@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AkademikController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\ContactController;
@@ -35,6 +36,10 @@ Route::get('/', function () {
 Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login');
 Route::post('/auth/login', [LoginController::class, 'login'])->name('loginSukses');
 Route::get('/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
+
+//api-login
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 //pengguna SIS-APP
 Route::middleware(['auth','check.status','role:admin'])->group(function () {
