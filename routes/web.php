@@ -15,7 +15,6 @@ use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SuratController;
-use App\Http\Controllers\SuratKeluarSekolahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -150,6 +149,10 @@ Route::get('/surat-izin/keluar-kelas/surat/{id}', [SuratController::class, 'show
 Route::get('/surat-izin/keluar-sekolah/create', [SuratController::class, 'createKeluarSekolah'])->name('keluar-sekolah.create');
 Route::post('/surat-izin/keluar-sekolah/create', [SuratController::class, 'storeKeluarSekolah'])->name('keluar-sekolah.store');
 Route::get('/surat-izin/keluar-sekolah/surat/{id}', [SuratController::class, 'showKeluarSekolah'])->name('keluar-sekolah.surat');
+
+Route::get('/surat-izin/kelab/create', [SuratController::class, 'createKeLab'])->name('kelab-create');
+Route::post('/surat-izin/kelab/create', [SuratController::class, 'storeKeLab'])->name('kelab-store');
+Route::get('/surat-izin/kelab/surat/{id}',[SuratController::class, 'showKeLab'])->name('surat-kelab');
 });
 
 //informasi khusus

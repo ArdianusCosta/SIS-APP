@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS-APP | Surat Izin Keluar Kelas</title>
+    <link rel="icon" href="/img/logo-SIS.jpg">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @media print {
@@ -73,22 +74,6 @@
             $nomor = $sortedSuratHariIni->search(function ($item) use ($surat) {
                 return $item->id === $surat->id;
             }) + 1;
-
-            function romanNumber($number) {
-                $roman = [
-                    'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
-                    'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
-                    'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
-                ];
-                $result = '';
-                foreach ($roman as $key => $value) {
-                    while ($number >= $value) {
-                        $result .= $key;
-                        $number -= $value;
-                    }
-                }
-                return $result;
-            }
         @endphp
 
         <p class="text-center text-lg font-semibold mb-4">

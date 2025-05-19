@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use App\Models\SuratIzinKeLab;
 use App\Models\SuratIzinKeluarKelas;
 use App\Models\SuratIzinKeluarSekolah;
 
@@ -13,7 +14,8 @@ class SuratController extends Controller
     {
         $suratTodayCount = SuratIzinKeluarKelas::whereDate('created_at', today())->count();
         $suratTodayCountSekolah = SuratIzinKeluarSekolah::whereDate('created_at', today())->count();
-        return view('surat-izin.index', compact('suratTodayCount', 'suratTodayCountSekolah'));
+        $suratTodayCountLab = SuratIzinKeLab::whereDate('created_at', today())->count();
+        return view('surat-izin.index', compact('suratTodayCount', 'suratTodayCountSekolah','suratTodayCountLab'));
     }
 
     public function createKeluarKelas()
@@ -105,23 +107,72 @@ class SuratController extends Controller
     }
 
     public function showKeluarSekolah($id)
-{
-    $keluarSekolah = SuratIzinKeluarSekolah::with('kelas')->findOrFail($id);
-    $suratHariIni = SuratIzinKeluarSekolah::whereDate('tanggal_surat', today())
-        ->orderBy('created_at', 'asc')
+    {
+        $keluarSekolah = SuratIzinKeluarSekolah::with('kelas')->findOrFail($id);
+        $suratHariIni = SuratIzinKeluarSekolah::whereDate('tanggal_surat', today())
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $currentIndex = $suratHariIni->search(function ($item) use ($keluarSekolah) {
+            return $item->id === $keluarSekolah->id;
+        });
+
+        $suratSebelumnya = $suratHariIni->get($currentIndex - 1);
+        $suratBerikutnya = $suratHariIni->get($currentIndex + 1);
+
+        $jumlahSurat = $suratHariIni->count();
+        $kelas = Kelas::all();
+        
+        return view('surat-izin.keluar-sekolah.surat', compact('suratHariIni','keluarSekolah','suratSebelumnya','suratBerikutnya','jumlahSurat','kelas'));
+    }
+
+    public function createKeLab()
+    {
+        $kelas = Kelas::all();
+        $keLab = SuratIzinKeLab::where('tanggal_izin', today())
+        ->orderBy('created_at','desc')
         ->get();
+        $suratBaru = $keLab->isNotEmpty() ? $keLab->first() : null;
+        $suratLama = $keLab->isNotEmpty() ? $keLab->last() : null;
+        $jumlahSurat = $keLab->count();
+        return view('surat-izin.kelab.create',compact('kelas','keLab','suratBaru','suratLama','jumlahSurat'));
+    }
 
-    $currentIndex = $suratHariIni->search(function ($item) use ($keluarSekolah) {
-        return $item->id === $keluarSekolah->id;
-    });
+    public function storeKeLab(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_penanggung_jawab' => 'required|string|max:255',
+            'tanggal_izin' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+            'kepada_yth' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
+            'jam_ke' => 'required|date_format:H:i',
+            'sampai_jam' => 'required|date_format:H:i|after:jam_ke',
+            'pesan_keluar_kelas' => 'required|string|max:255',
+        ]);
+        SuratIzinKeLab::create($validated);
+        return redirect()->route('kelab-create')->with('success','Surat izin ke Lab berhasil dibuat');
+    }
 
-    $suratSebelumnya = $suratHariIni->get($currentIndex - 1);
-    $suratBerikutnya = $suratHariIni->get($currentIndex + 1);
-
-    $jumlahSurat = $suratHariIni->count();
-    $kelas = Kelas::all();
+    public function showKeLab($id)
+    {
+        $keLab = SuratIzinKeLab::with('kelas')->findOrFail($id);
+        $suratHariIni = SuratIzinKeLab::whereDate('tanggal_izin', today())
+            ->orderBy('created_at', 'asc')
+            ->get();
     
-    return view('surat-izin.keluar-sekolah.surat', compact('suratHariIni','keluarSekolah','suratSebelumnya','suratBerikutnya','jumlahSurat','kelas'));
-}
+        $currentIndex = $suratHariIni->search(function ($item) use ($keLab) {
+            return $item->id === $keLab->id;
+        });
+    
+        $suratSebelumnya = $suratHariIni->get($currentIndex - 1);
+        $suratBerikutnya = $suratHariIni->get($currentIndex + 1);
+    
+        $jumlahSurat = $suratHariIni->count();
+        $kelas = Kelas::all();
+    
+        return view('surat-izin.kelab.surat', compact('keLab', 'suratHariIni', 'suratSebelumnya', 'suratBerikutnya', 'jumlahSurat', 'kelas'));
+    }
 
 }
