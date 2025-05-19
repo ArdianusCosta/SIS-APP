@@ -39,7 +39,6 @@ Route::get('/auth/logout', [LoginController::class, 'logout'])->name('auth.logou
 //Lupa pw
 Route::get('auth/forgotPW/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('auth/forgotPW/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
 Route::get('auth/forgotPW/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('auth/forgotPW/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 
