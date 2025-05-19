@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\SuratIzinKeLab;
@@ -15,7 +16,8 @@ class SuratController extends Controller
         $suratTodayCount = SuratIzinKeluarKelas::whereDate('created_at', today())->count();
         $suratTodayCountSekolah = SuratIzinKeluarSekolah::whereDate('created_at', today())->count();
         $suratTodayCountLab = SuratIzinKeLab::whereDate('created_at', today())->count();
-        return view('surat-izin.index', compact('suratTodayCount', 'suratTodayCountSekolah','suratTodayCountLab'));
+        $absensis = Absensi::whereDate('created_at', today())->count();
+        return view('surat-izin.index', compact('suratTodayCount', 'suratTodayCountSekolah','suratTodayCountLab','absensis'));
     }
 
     public function createKeluarKelas()

@@ -169,7 +169,7 @@
   <div class="footer-box mt-5">
     <div class="attendance-box">
       <div class="attendance-title">Jumlah Siswa Hadir Hari Ini</div>
-      <div class="attendance-number">285</div>
+        <div class="attendance-number">{{$absensis}}</div>
     </div>
     <div class="clock-date mt-3">
       <span id="current-date"></span> - <span id="clock"></span>
