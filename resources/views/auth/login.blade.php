@@ -42,7 +42,7 @@
         <label class="flex items-center">
           <input type="checkbox" class="form-checkbox text-orange-400 mr-2">Remember me
         </label>
-        <a href="#" class="text-orange-400 underline">Forgot password?</a>
+        <a href="{{route('password.request')}}" class="text-orange-400 underline">Forgot password?</a>
       </div>
 
       <button type="submit" class="w-full py-2 bg-orange-300 text-black font-semibold rounded-xl hover:bg-orange-400 transition duration-300">Login</button>

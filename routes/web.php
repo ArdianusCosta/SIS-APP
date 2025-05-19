@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\AbsensiController;
-use App\Http\Controllers\AkademikController;
-use App\Http\Controllers\Auth\GoogleController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\UserController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
-use App\Http\Controllers\InfomasiController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\OrangTuaController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SuratController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AkademikController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\InfomasiController;
+use App\Http\Controllers\OrangTuaController;
+use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,12 @@ Route::get('/', function () {
 Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login');
 Route::post('/auth/login', [LoginController::class, 'login'])->name('loginSukses');
 Route::get('/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
+//Lupa pw
+Route::get('auth/forgotPW/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('auth/forgotPW/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('auth/forgotPW/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('auth/forgotPW/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 
 //api-login
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
