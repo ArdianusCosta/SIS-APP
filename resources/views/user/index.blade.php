@@ -44,7 +44,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th  class="text-center">No</th>
+                              <th class="text-center">No</th>
                               <th class="text-center">Nama</th>
                               <th class="text-center">Email</th>
                               <th class="text-center">Status</th>

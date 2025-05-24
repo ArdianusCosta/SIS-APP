@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('p_p_d_b_registrasis', function (Blueprint $table) {
+        Schema::create('ppdb_registrasi', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('foto_pendaftar');
+            $table->string('foto_pendaftar')->nullable();
             $table->string('email')->nullable();
-            $table->string('no_telp',20)->nullable();
+            $table->string('no_telp')->nullable();
             $table->date('tgl_lahir');
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan']);
             $table->text('alamat')->nullable();
             $table->string('asal_sekolah_sebelumnya');
             $table->date('tgl_pendaftaran');
-            $table->enum('status',['Ditolak','Tertunda','Disetujui']);
+            $table->enum('status',['Ditolak','Tertunda','Disetujui'])->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_p_d_b_registrasis');
+        Schema::dropIfExists('ppdb_registrasi');
     }
 };

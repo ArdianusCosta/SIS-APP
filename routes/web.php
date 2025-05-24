@@ -140,4 +140,5 @@ Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.expor
 //PPDB
 Route::get('/PPDB/online/index', [PPDBController::class, 'index'])->name('PPDBonline.index');
 Route::get('/PPDB/online/create', [PPDBController::class, 'create'])->name('PPDBonline.create');
+Route::post('/PPDB/online/store', [PPDBController::class, 'store'])->name('PPDBonline.store');
 });

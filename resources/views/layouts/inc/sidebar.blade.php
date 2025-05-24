@@ -183,6 +183,22 @@
           </ul>
         </li>
 
+        <li class="nav-header">PPDB</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">        
+            <i class="nav-icon fas fa-bullhorn"></i>
+            <p>Informasi<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('PPDBonline.index')}}" class="nav-link {{request()->routeIs('PPDBonline.index') ? 'active' : ''}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PPDB Online</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item mt-5">
           <a href="{{ route('auth.logout') }}" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
