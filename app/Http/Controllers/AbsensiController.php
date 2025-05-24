@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absensi;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class AbsensiController extends Controller
         $cari = $request->get('query');
         $siswa = Siswa::where('nama', 'LIKE', "%{$cari}%")->get(['id','nama']);
         return response()->json($siswa);
-    }
+    }   
 
     public function create(Request $request)
     {
@@ -77,15 +78,13 @@ class AbsensiController extends Controller
         $qr = QrCode::format('svg')->generate($request->link);
         $qrImageName = $uid . '.svg';
     
-        // Simpan QR ke storage (opsional, kalau hanya ingin tampilkan langsung tidak perlu simpan)
         Storage::put('public/qr/' . $qrImageName, $qr);
     
-        // Misalnya kamu punya `nis`, dan ambil data siswa dari database
-        $nis = $request->get('nis'); // opsional
+        $nis = $request->get('nis'); 
         $foto = null;
     
         if ($nis) {
-            $siswa = \App\Models\Siswa::where('nis', $nis)->first();
+            $siswa = Siswa::where('nis', $nis)->first();
             $foto = $siswa?->foto;
         }
     

@@ -37,27 +37,63 @@
     </div>
 
     <div class="col-md-9">
-        <form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="card">
                 <div class="card-header"><h4>Edit Profile</h4></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label>Nama</label>
-                            <input type="text" class="form-control" name="name" value="{{$user->name}}">
+                            <input type="text" class="form-control" name="name" value="{{ $user->name }}">
+                            @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Email</label>
-                            <input type="email" name="email" class="form-control" value="{{$user->email}}">
+                            <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                            @error('email') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Profile</label>
                             <input type="file" name="photo" class="form-control">
+                            @error('photo') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                         </div>
-                        <div class="col-md-6 mb-3">
-                          <label>Password</label>
-                          <input type="text" class="form-control" placeholder="Masukan password baru...">
+                        <div class="col-md-6 mb-3 position-relative">
+                            <label>Password Lama</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="old_password" id="old_password" placeholder="Masukkan password lama...">
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePassword('old_password')">
+                                        <i class="fas fa-eye" id="eye-old_password"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            @error('old_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                        </div>
+                        <div class="col-md-6 mb-3 position-relative">
+                            <label>Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Masukkan password baru...">
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password')">
+                                        <i class="fas fa-eye" id="eye-new_password"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            @error('new_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                        </div>
+                        <div class="col-md-6 mb-3 position-relative">
+                            <label>Konfirmasi Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation" placeholder="Konfirmasi password baru...">
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password_confirmation')">
+                                        <i class="fas fa-eye" id="eye-new_password_confirmation"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            @error('new_password_confirmation') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-12 mt-4 text-center">
                             <button class="btn btn-primary btn-block" type="submit">Ubah Profile</button>
@@ -107,9 +143,29 @@
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(700px) rotate(360deg); opacity: 0; }
   }
+
+  .toggle-password {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
 </style>
 
 <script>
+  function togglePassword(fieldId) {
+    const input = document.getElementById(fieldId);
+    const eyeIcon = document.getElementById(`eye-${fieldId}`);
+    if (input.type === 'password') {
+      input.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+    } else {
+      input.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+    }
+  }
+
   function rainEmoji(emoji) {
     const container = document.getElementById('emoji-container');
     const rect = container.getBoundingClientRect();

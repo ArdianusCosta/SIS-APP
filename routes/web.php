@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\PPDBController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,7 +122,7 @@ Route::get('/surat-izin/kelab/surat/{id}',[SuratController::class, 'showKeLab'])
 Route::get('/informasi/index', [InfomasiController::class, 'index'])->name('informasi.index');
 //profile SIS-APP
 Route::get('/profile/index', [ProfileController::class, 'index'])->name('profile.index');
-Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //ini downloadnya bisa semua role
 Route::get('/download/{filename}', [MessageController::class, 'download'])->name('download.file');
 //manajement-akademik
@@ -136,4 +137,7 @@ Route::get('/manajement/kelas/edit/{id}', [KelasController::class,'edit'])->name
 Route::post('/manajement/kelas/edit/{id}', [KelasController::class,'update'])->name('kelas.update');
 Route::delete('/manajement/kelas/destroy/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
 Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.export');  
+//PPDB
+Route::get('/PPDB/online/index', [PPDBController::class, 'index'])->name('PPDBonline.index');
+Route::get('/PPDB/online/create', [PPDBController::class, 'create'])->name('PPDBonline.create');
 });
