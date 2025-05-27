@@ -9,7 +9,7 @@ class PPDBController extends Controller
 {
     public function index()
     {
-        $ppdbs = PPDBRegistrasi::paginate(5);
+        $ppdbs = PPDBRegistrasi::whereIn('status',['Disetujui','Ditolak'])->paginate(5);
         return view('PPDB.online.index',compact('ppdbs'));
     }
 
@@ -30,7 +30,7 @@ class PPDBController extends Controller
             'alamat' => 'nullable',
             'asal_sekolah_sebelumnya' => 'required',
             'tgl_pendaftaran' => 'required|date',
-            'status' => 'nullable|in:Ditolak,Tertunda,Disetujui',
+            'status' => 'Tertunda',
         ]);
         $fotoPath = null;
         if($request->hasFile('foto_pendaftar')){
@@ -48,6 +48,33 @@ class PPDBController extends Controller
             'tgl_pendaftaran' => $request->tgl_pendaftaran,
             'status' => $request->status,
         ]);
-        return redirect()->route('PPDBonline.index')->with('success','Berhasil Daftar');
+        return redirect()->route('PPDBonline.index')->with('success','Berhasil Daftar Silankan tunggu informasi lewat status yang akan diupdate disini');
     }
+
+    public function destroy($id)
+    {
+        $ppdbs = PPDBRegistrasi::findOrFail($id);
+        $ppdbs->delete();
+        return back()->with('success','Berhasil hapus data');
+    }
+
+    public function adminIndex()
+    {
+        $ppdbs = PPDBRegistrasi::paginate(5); 
+        return view('PPDB.status.index-admin', compact('ppdbs'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Ditolak,Tertunda,Disetujui',
+        ]);
+
+        $ppdb = PPDBRegistrasi::findOrFail($id);
+        $ppdb->status = $request->status;
+        $ppdb->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui data akan diupdate di PPDB Online');
+    }
+
 }

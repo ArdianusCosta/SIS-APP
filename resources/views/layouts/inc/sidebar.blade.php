@@ -2,16 +2,16 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="https://github.com/ArdianusCosta" class="brand-link">
-    <img src="/admin/dist/img/logo-SIS.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="/admin/dist/img/logo-SIS.jpg" alt="Logo SIS-APP" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">SIS-APP</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user (optional) -->
+    <!-- User Panel -->
+    @php $user = auth()->user(); @endphp
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        @php $user = auth()->user(); @endphp
         <img src="{{ $user && $user->photo ? asset('storage/' . $user->photo) : '/admin/dist/img/user4-128x128.jpg' }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <!-- SidebarSearch Form -->
+    <!-- Search Form -->
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -34,27 +34,29 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <!-- Dashboard -->
         <li class="nav-item">
-          <a href="{{route('welcome')}}" class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}">
+          <a href="{{ route('welcome') }}" class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p>
           </a>
         </li>
 
         @auth
-          @php $user = auth()->user(); @endphp
-
           @if ($user->role === 'admin')
             <li class="nav-header">Halaman Akun</li>
             <li class="nav-item">
-              <a href="{{route('user.index')}}" class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
+              <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>Pengguna</p>
               </a>
             </li>
           @endif
 
-          @php $manajemenRoutes = ['guru.index', 'siswa.index', 'kelas.index', 'ortu.index','akademik.index']; @endphp
+          @php
+            $manajemenRoutes = ['guru.index', 'siswa.index', 'kelas.index', 'ortu.index', 'akademik.index'];
+          @endphp
           @if (in_array($user->role, ['admin','guru']))
             <li class="nav-header">Halaman Manajement</li>
             <li class="nav-item {{ in_array(Route::currentRouteName(), $manajemenRoutes) ? 'menu-open' : '' }}">
@@ -64,33 +66,33 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('akademik.index')}}" class="nav-link {{request()->routeIs('akademik.index') ? 'active' : ''}}">
+                  <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.index') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manajement Akademik</p>
                   </a>
                 </li>
                 @if ($user->role === 'admin')
-                <li class="nav-item">
-                  <a href="{{route('guru.index')}}" class="nav-link {{ request()->routeIs('guru.index') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Manajement Guru</p>
-                  </a>
-                </li>
+                  <li class="nav-item">
+                    <a href="{{ route('guru.index') }}" class="nav-link {{ request()->routeIs('guru.index') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manajement Guru</p>
+                    </a>
+                  </li>
                 @endif
                 <li class="nav-item">
-                  <a href="{{route('siswa.index')}}" class="nav-link {{ request()->routeIs('siswa.index') ? 'active' : '' }}">
+                  <a href="{{ route('siswa.index') }}" class="nav-link {{ request()->routeIs('siswa.index') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manajement Siswa</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('kelas.index')}}" class="nav-link {{ request()->routeIs('kelas.index') ? 'active' : '' }}">
+                  <a href="{{ route('kelas.index') }}" class="nav-link {{ request()->routeIs('kelas.index') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manajement Kelas</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('ortu.index')}}" class="nav-link {{ request()->routeIs('ortu.index') ? 'active' : '' }}">
+                  <a href="{{ route('ortu.index') }}" class="nav-link {{ request()->routeIs('ortu.index') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manajement Orang Tua</p>
                   </a>
@@ -140,7 +142,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('surat.index')}}" class="nav-link {{ request()->routeIs('surat.index') ? 'active' : '' }}">
+                  <a href="{{ route('surat.index') }}" class="nav-link {{ request()->routeIs('surat.index') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Aktivitas Surat Izin</p>
                   </a>
@@ -150,16 +152,17 @@
           @endif
         @endauth
 
+        <!-- Informasi -->
         <li class="nav-header">Informasi & Penggumuman</li>
         @php $informasiRoutes = ['kontak-guru', 'email.create','informasi.*']; @endphp
-        <li class="nav-item {{ request()->routeIs('kontak-guru', 'email.create', 'informasi.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ request()->routeIs('kontak-guru', 'email.create', 'informasi.*') ? 'active' : '' }}">        
+        <li class="nav-item {{ request()->routeIs(...$informasiRoutes) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->routeIs(...$informasiRoutes) ? 'active' : '' }}">
             <i class="nav-icon fas fa-bullhorn"></i>
             <p>Informasi<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('informasi.index')}}" class="nav-link {{request()->routeIs('informasi.index') ? 'active' : ''}}">
+              <a href="{{ route('informasi.index') }}" class="nav-link {{ request()->routeIs('informasi.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Info & Penggumuman</p>
               </a>
@@ -171,58 +174,77 @@
               </a>
             </li>
             @auth
-              @if (in_array(auth()->user()->role, ['admin','guru']))
-              <li class="nav-item">
-                <a href="{{ route('email.create') }}" class="nav-link {{ request()->routeIs('email.create') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kirim ke Pengguna</p>
-                </a>
-              </li>
+              @if (in_array($user->role, ['admin','guru']))
+                <li class="nav-item">
+                  <a href="{{ route('email.create') }}" class="nav-link {{ request()->routeIs('email.create') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kirim ke Pengguna</p>
+                  </a>
+                </li>
               @endif
             @endauth
           </ul>
         </li>
 
+        <!-- PPDB -->
         <li class="nav-header">PPDB</li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">        
-            <i class="nav-icon fas fa-bullhorn"></i>
-            <p>Informasi<i class="right fas fa-angle-left"></i></p>
+        @php
+          $ppdbRoutes = ['PPDBonline.index', 'PPDBonline.create', 'admin.ppdb.index', 'admin.ppdb.update'];
+          $isPpdbActive = request()->routeIs(...$ppdbRoutes);
+        @endphp
+        <li class="nav-item {{ $isPpdbActive ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ $isPpdbActive ? 'active' : '' }}">
+            <i class="nav-icon fas fa-clipboard-list"></i>
+            <p>PPDB<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('PPDBonline.index')}}" class="nav-link {{request()->routeIs('PPDBonline.index') ? 'active' : ''}}">
+              <a href="{{ route('PPDBonline.index') }}" class="nav-link {{ request()->routeIs('PPDBonline.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>PPDB Online</p>
               </a>
             </li>
+            @auth
+              @if ($user->role === 'admin')
+                <li class="nav-item">
+                  <a href="{{ route('admin.ppdb.index') }}" class="nav-link {{ request()->routeIs('admin.ppdb.index') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>PPDB Status</p>
+                  </a>
+                </li>
+              @endif
+            @endauth
           </ul>
         </li>
 
+        <!-- Logout -->
         <li class="nav-item mt-5">
           <a href="{{ route('auth.logout') }}" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
             <p>Logout</p>
           </a>
         </li>
+
       </ul>
     </nav>
   </div>
 </aside>
 
+<!-- Sidebar Click Script -->
 <script>
   document.body.addEventListener('click', function (e) {
     const el = e.target.closest('.sidebar-search-results .list-group-item');
     if (el) {
       e.preventDefault();
-      let href = el.getAttribute('href');
-      if (href.startsWith(window.location.origin)) {
+      const href = el.getAttribute('href');
+      if (href && href.startsWith(window.location.origin)) {
         window.location.href = href;
       } else {
         try {
-          href = decodeURIComponent(href);
-        } catch (e) {}
-        window.location.href = href;
+          window.location.href = decodeURIComponent(href);
+        } catch (err) {
+          console.error('Invalid link', err);
+        }
       }
     }
   });

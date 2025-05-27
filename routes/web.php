@@ -62,6 +62,10 @@ Route::get('/manajement/guru/edit/{id}', [GuruController::class, 'edit'])->name(
 Route::post('/manajement/guru/edit/{id}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/manajement/guru/hapus/{id}', [GuruController::class, 'destroy'])->name('guru.hapus');
 Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export');
+//admin-status
+Route::delete('/PPDB/online/destroy/{id}', [PPDBController::class, 'destroy'])->name('PPDBonline.destroy');
+Route::get('/PPDB/status/index-admin', [PPDBController::class,'adminIndex'])->name('admin.ppdb.index');
+Route::post('/PPDB/status/index-admin/{id}/update-status', [PPDBController::class,'updateStatus'])->name('admin.ppdb.update');
 });
 
 
