@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
-
+@push('js')
 <script>
   //untuk search  
   document.addEventListener('DOMContentLoaded', function () {
@@ -49,4 +49,22 @@
       }
     });
   });
+
+      // untuk cek notifikasi baru
+    let previousUnreadCount = {{ $unreadCount ?? 0 }};
+
+    function checkForNewNotifications() {
+        fetch("{{ route('api.get-unread-count') }}")
+            .then(response => response.json())
+            .then(data => {
+                let currentCount = data.unreadCount;
+
+                if (currentCount > previousUnreadCount) {
+                    document.getElementById('notifSound').play();
+                }
+                previousUnreadCount = currentCount;
+            });
+    }
+    setInterval(checkForNewNotifications, 15000);
 </script>
+@endpush

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PPDBRegistrasi;
+use App\Models\PpdbNotifikasi;
+use Storage;
 use Illuminate\Http\Request;
+use App\Models\PPDBRegistrasi;
 
 class PPDBController extends Controller
 {
@@ -36,24 +38,35 @@ class PPDBController extends Controller
         if($request->hasFile('foto_pendaftar')){
             $fotoPath = $request->file('foto_pendaftar')->store('PPDB-Online','public');
         };
-        PPDBRegistrasi::create([
-            'nama' => $request->nama,
-            'foto_pendaftar' => $fotoPath,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'tgl_lahir' => $request->tgl_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-            'asal_sekolah_sebelumnya' => $request->asal_sekolah_sebelumnya,
-            'tgl_pendaftaran' => $request->tgl_pendaftaran,
-            'status' => $request->status,
+       $ppdb = PPDBRegistrasi::create([
+                'nama' => $request->nama,
+                'foto_pendaftar' => $fotoPath,
+                'email' => $request->email,
+                'no_telp' => $request->no_telp,
+                'tgl_lahir' => $request->tgl_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+                'asal_sekolah_sebelumnya' => $request->asal_sekolah_sebelumnya,
+                'tgl_pendaftaran' => $request->tgl_pendaftaran,
+                'status' => $request->status,
         ]);
+            PpdbNotifikasi::create([
+            'ppdb_id' => $ppdb->id,
+            'message' => "Pendaftar baru: {$ppdb->nama} telah mendaftar PPDB.",
+            'is_read' => false,
+        ]);
+
         return redirect()->route('PPDBonline.index')->with('success','Berhasil Daftar Silankan tunggu informasi lewat status yang akan diupdate disini');
     }
 
     public function destroy($id)
     {
         $ppdbs = PPDBRegistrasi::findOrFail($id);
+
+        if($ppdbs->foto_pendaftar && \Storage::disk('public')->exists($ppdbs->foto_pendaftar)){
+            \Storage::disk('public')->delete($ppdbs->foto_pendaftar);
+        }
+
         $ppdbs->delete();
         return back()->with('success','Berhasil hapus data');
     }
@@ -75,6 +88,18 @@ class PPDBController extends Controller
         $ppdb->save();
 
         return redirect()->back()->with('success', 'Status berhasil diperbarui data akan diupdate di PPDB Online');
+    }
+
+    public function baca($id)
+    {
+        $notif = PpdbNotifikasi::findOrFail($id);
+
+        if (!$notif->is_read) {
+            $notif->is_read = 1;
+            $notif->save();
+        }
+
+        return redirect()->route('PPDBonline.index')->with('success', 'Notifikasi dibaca');
     }
 
 }

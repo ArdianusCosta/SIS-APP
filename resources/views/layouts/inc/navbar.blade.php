@@ -60,25 +60,74 @@
           </a>
           <div class="dropdown-divider"></div>
       </li>
+      
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-      </li>
+      @auth
+          @if (in_array(auth()->user()->role, ['admin']))
+          <style>
+            .dropdown-menu {
+              min-width: 300px;
+              border-radius: 0.5rem;
+              padding: 0.5rem;
+              font-size: 14px;
+            }
+            .dropdown-item {
+              white-space: normal;
+            }
+          </style>  
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-bell"></i>
+              @if($unreadCount > 0)
+                <span class="badge badge-warning navbar-badge">{{ $unreadCount }}</span>
+              @endif
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow">
+              <span class="dropdown-item text-center font-weight-bold">{{ $notifications->count() }} Notifikasi Terbaru</span>
+              <div class="dropdown-divider"></div>
+          
+              @foreach($notifications as $notif)
+              <a href="{{ route('ppdb-notifikasi.baca', $notif->id) }}" class="dropdown-item {{ $notif->is_read ? 'text-muted' : '' }}">
+                <i class="fas fa-user-plus mr-2"></i> {{ $notif->message }}
+                  <span class="float-right text-muted text-sm">{{ $notif->created_at->diffForHumans() }}</span>
+                </a>
+                <div class="dropdown-divider"></div>
+              @endforeach
+          
+              <a href="#" class="dropdown-item text-center text-primary font-weight-bold">
+                Lihat Semua Notifikasi
+              </a>
+            </div>
+          </li>
+
+          <script>
+            let previousUnreadCount = {{ $unreadCount ?? 0 }};
+        
+            function checkForNewNotifications() {
+                fetch("{{ route('api.get-unread-count') }}")
+                    .then(res => res.json())
+                    .then(data => {
+                        const currentCount = data.unreadCount;
+                        if (currentCount > previousUnreadCount) {
+                            document.getElementById('notifSound').play();
+                        }
+                        previousUnreadCount = currentCount;
+                    });
+            }
+        
+            setInterval(checkForNewNotifications, 15000); // tiap 15 detik cek
+        </script>
+        
+
+          @endif
+      @endauth      
+
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      
     </ul>
   </nav>
   <!-- /.navbar -->

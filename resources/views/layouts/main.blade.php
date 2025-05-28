@@ -25,7 +25,7 @@
 
     <!-- Main content -->
     <section class="content">
-
+      <audio id="notifSound" src="{{ asset('sounds/notif.mp3') }}" preload="auto"></audio>
      @yield('content')
 
     </section>

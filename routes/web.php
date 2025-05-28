@@ -66,6 +66,12 @@ Route::get('/exportGuru', [GuruController::class, 'export'])->name('guru.export'
 Route::delete('/PPDB/online/destroy/{id}', [PPDBController::class, 'destroy'])->name('PPDBonline.destroy');
 Route::get('/PPDB/status/index-admin', [PPDBController::class,'adminIndex'])->name('admin.ppdb.index');
 Route::post('/PPDB/status/index-admin/{id}/update-status', [PPDBController::class,'updateStatus'])->name('admin.ppdb.update');
+Route::get('/ppdb-notifikasi/{id}/baca', [PPDBController::class, 'baca'])->name('ppdb-notifikasi.baca');
+Route::get('/api/unread-count', function () {
+    $count = \App\Models\PpdbNotifikasi::where('is_read', 0)->count();
+    return response()->json(['unreadCount' => $count]);
+})->name('api.get-unread-count');
+
 });
 
 
