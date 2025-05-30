@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('alamat')->nullable();
             $table->string('asal_sekolah_sebelumnya');
             $table->date('tgl_pendaftaran');
-            $table->enum('status',['Ditolak','Tertunda','Disetujui'])->nullable();
+            $table->enum('status',['Ditolak','Tertunda','Disetujui'])->default('Tertunda')->nullable();
             $table->timestamps();
         });
     }
