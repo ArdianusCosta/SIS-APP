@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\PPDB\PPDBDocument;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PPDBDocument;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PPDBRegistrasi extends Model
 {

@@ -85,6 +85,26 @@
                                                 <td>: {{ $ppdb->nama }}</td>
                                             </tr>
                                             <tr>
+                                                <th>NISN</th>
+                                                <td>: {{ $ppdb->nisn }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>NIK</th>
+                                                <td>: {{ $ppdb->nik }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email</th>
+                                                <td>: {{ $ppdb->email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>No Telp</th>
+                                                <td>: {{ $ppdb->no_telp }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tempat Lahir</th>
+                                                <td>: {{ $ppdb->tempat_lahir }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Tanggal Lahir</th>
                                                 <td>: {{ $ppdb->tgl_lahir }}</td>
                                             </tr>
@@ -93,8 +113,20 @@
                                                 <td>: {{ $ppdb->jenis_kelamin }}</td>
                                             </tr>
                                             <tr>
+                                                <th>Alamat</th>
+                                                <td>: {{ $ppdb->alamat }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Asal Sekolah</th>
                                                 <td>: {{ $ppdb->asal_sekolah_sebelumnya }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama Ayah</th>
+                                                <td>: {{ $ppdb->nama_ayah }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama Ibu</th>
+                                                <td>: {{ $ppdb->nama_ibu }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Tanggal Daftar</th>

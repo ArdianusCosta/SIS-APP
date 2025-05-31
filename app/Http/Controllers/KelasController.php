@@ -105,11 +105,6 @@ class KelasController extends Controller
         return back()->with('success','Berhasil Hapus Data');
     }
 
-    public function show()
-    {
-        
-    }
-
     public function export()
     {
         return Excel::download(new KelasExport, 'Kelas.xlsx');
