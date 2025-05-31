@@ -37,7 +37,7 @@ class ForgotPasswordController extends Controller
     
         $link = url('auth/forgotPW/reset-password/' . $token . '?email=' . urlencode($request->email));
     
-        Mail::to($request->email)->send(new ForgotPasswordMail($link));
+        Mail::to($request->email)->queue(new ForgotPasswordMail($link));
     
         logger("Link reset: $link"); 
     

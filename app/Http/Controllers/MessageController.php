@@ -38,12 +38,12 @@ class MessageController extends Controller
         ]);
 
         if ($request->filled('email')) {
-            Mail::to($request->email)->send(
+            Mail::to($request->email)->queue(
                 new KirimEmail($message->nama_pengirim, $message->pesan, $message->file ? url('download/' . basename($message->file)) : null)
             );                    } else {
             $users = User::all();
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new KirimEmail($message, $user));
+                Mail::to($user->email)->queue(new KirimEmail($message, $user));
             }
         }
 

@@ -101,7 +101,7 @@ class PPDBController extends Controller
         $ppdb->save();
     
         if ($ppdb->email && in_array($ppdb->status, ['Ditolak', 'Disetujui'])) {
-            Mail::to($ppdb->email)->send(new PPDBStatusNotifikasi($ppdb));
+            Mail::to($ppdb->email)->queue(new PPDBStatusNotifikasi($ppdb));
         }
     
         // if ($ppdb->no_telp && in_array($ppdb->status, ['Ditolak', 'Disetujui'])) {
