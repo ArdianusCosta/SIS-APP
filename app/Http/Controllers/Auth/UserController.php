@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+
         $query = User::query();
 
         if ($request->filled('cari')) {
@@ -55,6 +57,7 @@ class UserController extends Controller
         ]);
 
         User::create([
+            'uuid' => Str::uuid(),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -65,10 +68,10 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success','Berhasil Tambah Data Pengguna');
     }
 
-    public function edit($id)
+    public function edit($uuid)
     {
-        $user = User::findOrFail($id);
-        return view('user.edit',compact('user'));
+        $user = User::where('uuid', $uuid)->firstOrFail();
+        return view('user.edit', compact('user'));
     }
 
     public function update(Request $request, $id)

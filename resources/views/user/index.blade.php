@@ -63,8 +63,8 @@
                               <td class="text-center">{{$user->role}}</td>
                               <td class="text-center">
                                 <div class="d-grid gap-2">
-                                  <a href="{{route('user.edit', $user->id)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
-                                  <form action="{{route('user.hapus', $user->id)}}" method="post">
+                                  <a href="{{route('user.edit', $user->uuid)}}" class="btn btn-warning mr-2 mb-2">Edit</a>
+                                  <form action="{{route('user.hapus', $user->uuid)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit" class="btn btn-danger mr-2 mb-2" value="Hapus">

@@ -51,7 +51,7 @@ Route::middleware(['auth','check.status','role:admin'])->group(function () {
 Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::get('/user/edit/{uuid}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 Route::delete('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user.hapus');
 //manajement-guru
@@ -71,9 +71,7 @@ Route::get('/api/unread-count', function () {
     $count = \App\Models\PpdbNotifikasi::where('is_read', 0)->count();
     return response()->json(['unreadCount' => $count]);
 })->name('api.get-unread-count');
-
 });
-
 
 Route::middleware(['auth','check.status','role:admin,guru'])->group(function(){
 //manajement-ortu
