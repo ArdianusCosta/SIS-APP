@@ -112,7 +112,7 @@ Route::post('/informasi/create', [InfomasiController::class, 'store'])->name('in
 
 
 Route::middleware(['auth','check.status','role:admin,guru,murid'])->group(function(){
-//contact untuk hubugin bang costaaja .. wop tapi belum jadi
+//contact untuk hubungin bang costaaja .. wop tapi belum jadi
 Route::get('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'index'])->name('contact-to-speedseat.index');
 Route::post('/contact_to_speatseed/index-spreatseed', [ContactController::class, 'store'])->name('contact-to-speedseat.store');
 //surat

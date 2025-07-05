@@ -43,8 +43,7 @@
                 <img 
                   src="{{ asset('storage/' . $guru->img) }}" 
                   alt="Foto Guru" 
-                  class="img-fluid rounded-circle border" 
-                  style="width: 128px; height: 128px; object-fit: cover; border-radius: 50%;"
+                  class="profile-img-circle mx-auto d-block"
                 >
               </div>
             </div>
@@ -91,7 +90,6 @@
                 <li class="list-group-item"><strong>Alamat:</strong> {{ $guru->alamat ?? '-' }}</li>
                 <li class="list-group-item"><strong>No Telepon:</strong> {{ $guru->no_telepon ?? '-' }}</li>
                 <li class="list-group-item"><strong>Email:</strong> {{ $guru->email ?? '-' }}</li>
-                <!-- Tambahkan field lain jika ada, misalnya -->
                 <!-- <li class="list-group-item"><strong>Tentang Saya:</strong> {{ $guru->about_me ?? '-' }}</li> -->
               </ul>
             </div>
@@ -105,4 +103,16 @@
     </div>
   </div>
 </div>
+
+<style>
+  .profile-img-circle {
+    width: 120px;
+    height: 120px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #dee2e6; 
+  }
+</style>
+
 @endsection

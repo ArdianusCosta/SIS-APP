@@ -3,22 +3,24 @@
   <!-- Brand Logo -->
   <a href="https://github.com/ArdianusCosta" class="brand-link">
     <img src="/admin/dist/img/logo-SIS.jpg" alt="Logo SIS-APP" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">SIS-APP</span>
+    <span class="brand-text font-bold">SIS-APP</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- User Panel -->
     @php $user = auth()->user(); @endphp
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{ $user && $user->photo ? asset('storage/' . $user->photo) : '/admin/dist/img/user4-128x128.jpg' }}" class="img-circle elevation-2" alt="User Image">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+      <div class="image position-relative">
+        <img src="{{ $user && $user->photo ? asset('storage/' . $user->photo) : '/admin/dist/img/user4-128x128.jpg' }}"
+             alt="User Image"
+             class="profile-sidebar-img">
       </div>
       <div class="info">
-        <a href="{{ $user ? route('profile.index') : '#' }}" class="d-block">{{ $user ? $user->name : 'Guest' }}</a>
+        <a href="{{ $user ? route('profile.index') : '#' }}" class="d-block text-sm font-bold-wight">{{ $user->name }}</a>
       </div>
     </div>
-
+    
     <!-- Search Form -->
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">

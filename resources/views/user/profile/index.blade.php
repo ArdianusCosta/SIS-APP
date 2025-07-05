@@ -20,105 +20,130 @@
 
 <div class="container-fluid" id="emoji-container">
   <div class="row">
+    {{-- Sidebar Profil --}}
     <div class="col-md-3">
       <div class="card card-primary card-outline">
         <div class="card-body box-profile text-center">
-          <img class="profile-user-img img-fluid img-circle"  
-          src="{{ $user->photo ? asset('storage/' . $user->photo) : '/admin/dist/img/user4-128x128.jpg' }}"
-          alt="User profile picture">     
+          <img id="profile-preview"
+               class="profile-user-img img-fluid img-circle"
+               src="{{ $user->photo ? asset('storage/' . $user->photo) : '/admin/dist/img/user4-128x128.jpg' }}"
+               alt="User profile picture">
+
           <h3 class="profile-username">{{ $user->name }}</h3>
           <p class="text-muted">{{ $user->role ?? 'User' }}</p>
+
           <ul class="list-group list-group-unbordered mb-3 text-left">
-            <li class="list-group-item"><b>Email</b> <span class="float-right">{{ $user->email }}</span></li>
-            <li class="list-group-item"><b>Status</b> <span class="float-right">{{ $user->status ? 'Aktif' : 'Dibanned' }}</span></li>
+            <li class="list-group-item">
+              <b>Email</b>
+              <span class="float-right">{{ $user->email }}</span>
+            </li>
+            <li class="list-group-item">
+              <b>Status</b>
+              <span class="float-right">{{ $user->status ? 'Aktif' : 'Dibanned' }}</span>
+            </li>
           </ul>
         </div>
       </div>
     </div>
 
+    {{-- Form Ubah Profil --}}
     <div class="col-md-9">
-        <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
-            <div class="card">
-                <div class="card-header"><h4>Edit Profile</h4></div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label>Nama</label>
-                            <input type="text" class="form-control" name="name" value="{{ $user->name }}">
-                            @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control" value="{{ $user->email }}">
-                            @error('email') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Profile</label>
-                            <input type="file" name="photo" class="form-control">
-                            @error('photo') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3 position-relative">
-                            <label>Password Lama</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="old_password" id="old_password" placeholder="Masukkan password lama...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text toggle-password" onclick="togglePassword('old_password')">
-                                        <i class="fas fa-eye" id="eye-old_password"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            @error('old_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3 position-relative">
-                            <label>Password Baru</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Masukkan password baru...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password')">
-                                        <i class="fas fa-eye" id="eye-new_password"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            @error('new_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3 position-relative">
-                            <label>Konfirmasi Password Baru</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation" placeholder="Konfirmasi password baru...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password_confirmation')">
-                                        <i class="fas fa-eye" id="eye-new_password_confirmation"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            @error('new_password_confirmation') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-12 mt-4 text-center">
-                            <button class="btn btn-primary btn-block" type="submit">Ubah Profile</button>
-                        </div>
-                    </div>
+      <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
+        <div class="card">
+          <div class="card-header"><h4>Edit Profil</h4></div>
+          <div class="card-body">
+            <div class="row">
+              {{-- Nama --}}
+              <div class="col-md-6 mb-3">
+                <label>Nama</label>
+                <input type="text" class="form-control" name="name" value="{{ $user->name }}">
+                @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Email --}}
+              <div class="col-md-6 mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                @error('email') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Ganti Foto --}}
+              <div class="col-md-6 mb-3">
+                <label>Foto Profil</label>
+                <input type="file" name="photo" class="form-control" id="photo-input">
+                @error('photo') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Password Lama --}}
+              <div class="col-md-6 mb-3 position-relative">
+                <label>Password Lama</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="old_password" id="old_password" placeholder="Masukkan password lama...">
+                  <div class="input-group-append">
+                    <span class="input-group-text toggle-password" onclick="togglePassword('old_password')">
+                      <i class="fas fa-eye" id="eye-old_password"></i>
+                    </span>
+                  </div>
                 </div>
+                @error('old_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Password Baru --}}
+              <div class="col-md-6 mb-3 position-relative">
+                <label>Password Baru</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Masukkan password baru...">
+                  <div class="input-group-append">
+                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password')">
+                      <i class="fas fa-eye" id="eye-new_password"></i>
+                    </span>
+                  </div>
+                </div>
+                @error('new_password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Konfirmasi Password Baru --}}
+              <div class="col-md-6 mb-3 position-relative">
+                <label>Konfirmasi Password Baru</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation" placeholder="Konfirmasi password baru...">
+                  <div class="input-group-append">
+                    <span class="input-group-text toggle-password" onclick="togglePassword('new_password_confirmation')">
+                      <i class="fas fa-eye" id="eye-new_password_confirmation"></i>
+                    </span>
+                  </div>
+                </div>
+                @error('new_password_confirmation') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+              </div>
+
+              <div class="col-12 mt-4 text-center">
+                <button class="btn btn-primary btn-block" type="submit">Ubah Profil</button>
+              </div>
             </div>
-        </form>
+          </div>
+        </div>
+      </form>
     </div>
 
+    {{-- Zona Emoji --}}
     <div class="col-md-12 mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h4>Ekspresikan Dirimu 😄</h4>
-            </div>
-            <div class="card-body text-center">
-                <div class="emoji-zone">
-                    <span class="emoji" onclick="rainEmoji('🎉')">🎉</span>
-                    <span class="emoji" onclick="rainEmoji('😂')">😂</span>
-                    <span class="emoji" onclick="rainEmoji('🔥')">🔥</span>
-                    <span class="emoji" onclick="rainEmoji('💯')">💯</span>
-                </div>
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <h4>Ekspresikan Dirimu 😄</h4>
         </div>
+        <div class="card-body text-center">
+          <div class="emoji-zone">
+            <span class="emoji" onclick="rainEmoji('🎉')">🎉</span>
+            <span class="emoji" onclick="rainEmoji('😂')">😂</span>
+            <span class="emoji" onclick="rainEmoji('🔥')">🔥</span>
+            <span class="emoji" onclick="rainEmoji('💯')">💯</span>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -149,6 +174,13 @@
     background: transparent;
     border: none;
   }
+
+  .profile-user-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 </style>
 
 <script>
@@ -157,12 +189,10 @@
     const eyeIcon = document.getElementById(`eye-${fieldId}`);
     if (input.type === 'password') {
       input.type = 'text';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
+      eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
     } else {
       input.type = 'password';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
+      eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
     }
   }
 
@@ -180,15 +210,27 @@
       const el = document.createElement('div');
       el.classList.add('rain-emoji');
       el.innerText = emoji;
-
       el.style.left = (left + Math.random() * width) + 'px';
       el.style.top = top + 'px';
       el.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
 
       document.body.appendChild(el);
-
       setTimeout(() => el.remove(), 1500);
     }
   }
+
+  document.getElementById('photo-input').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('profile-preview');
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 </script>
+
 @endsection

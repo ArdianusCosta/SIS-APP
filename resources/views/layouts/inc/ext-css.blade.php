@@ -31,12 +31,56 @@
       object-fit: cover;
   }
 
-    .image img {
-      width: 40px; 
-      height: 40px; 
-      border-radius: 40%; 
-      object-fit: cover; 
+    .image {
+    width: 40px;
+    height: 40px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc; 
   }
+
+    .profile-sidebar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .user-panel {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .user-panel .image {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      background-color: #ccc;
+    }
+
+    .user-panel .image img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .user-panel .info {
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+    }
   
     .preloader {
     background-color: #343a40;
