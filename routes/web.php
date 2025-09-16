@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\PPDBController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SuratController;
@@ -10,14 +11,14 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AkademikController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\InfomasiController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\GoogleController;
-use App\Http\Controllers\PPDBController;
+use App\Http\Controllers\TTDElectronicController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,4 +150,10 @@ Route::get('/exportKelas', [KelasController::class,'export'])->name('kelas.expor
 Route::get('/PPDB/online/index', [PPDBController::class, 'index'])->name('PPDBonline.index');
 Route::get('/PPDB/online/create', [PPDBController::class, 'create'])->name('PPDBonline.create');
 Route::post('/PPDB/online/store', [PPDBController::class, 'store'])->name('PPDBonline.store');
+
+//ttd electronic
+Route::prefix('ttd-electronik')->group(function () {
+Route::get('/index', [TTDElectronicController::class, 'index'])->name('ttd-electronik.index');
+Route::post('/index', [TTDElectronicController::class, 'store'])->name('ttd-electronik.store');
+});
 });

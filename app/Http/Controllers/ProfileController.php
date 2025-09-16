@@ -22,7 +22,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|email|unique:users,email,' . Auth::id(),
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
             'old_password' => 'nullable|string|min:8', 
             'new_password' => 'nullable|string|min:8|confirmed',
         ]);

@@ -219,6 +219,15 @@
           </ul>
         </li>
 
+        <!-- Tanda Tangan Electronic-->
+        <li class="nav-header">Tanda Tangan Electronic</li>
+        <li class="nav-item">
+          <a href="{{ route('ttd-electronik.index') }}" class="nav-link {{ request()->routeIs('ttd-electronik.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-signature"></i>
+            <p>Tanda Tangan Electronic</p>
+          </a>
+        </li>
+
         <!-- Logout -->
         <li class="nav-item mt-5">
           <a href="{{ route('auth.logout') }}" class="nav-link">
